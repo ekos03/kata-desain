@@ -2,6 +2,7 @@ import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
 import { clamp, Pal, SANS } from "../lib/base";
 import { ease, tidy } from "../lib/ui";
+import { DISPLAY, SERIF } from "./fonts";
 
 // Tata letak bebas KATA DESAIN: teks bisa ditaruh di mana saja (x, y, lebar, perataan),
 // dengan gaya masuk berbeda-beda. Tetap jelas: kontras dari tone, ukuran besar, tanpa kata menggantung.
@@ -192,5 +193,109 @@ export const Note: React.FC<{ pal: Pal; y: number; at: number; text: string }> =
   const f = useCurrentFrame();
   return (
     <div style={{ position: "absolute", left: 90, right: 90, top: y, textAlign: "center", fontFamily: SANS, fontSize: 28, lineHeight: 1.3, color: pal.line, opacity: 0.65 * ease(f, at, at + 14), textWrap: "balance" }}>{tidy(text)}</div>
+  );
+};
+
+// ================== Tipografi tampilan & elemen info (gaya realis) ==================
+
+/**
+ * Judul tampilan: `|` = pindah baris, `*kata*` = serif miring berwarna aksen,
+ * `_kata_` = distabilo. Contoh: "Kenapa *dilewati*|_pembeli?_"
+ */
+export const Headline: React.FC<{ pal: Pal; y: number; at: number; text: string; size?: number; out?: number }> = ({ pal, y, at, text, size = 124, out }) => {
+  const f = useCurrentFrame();
+  const o = out !== undefined ? 1 - ease(f, out, out + 10) : 1;
+  let wi = 0;
+  return (
+    <div style={{ position: "absolute", left: 50, right: 50, top: y, textAlign: "center", opacity: o }}>
+      {text.split("|").map((line, li) => (
+        <div key={li} style={{ lineHeight: 0.98, whiteSpace: "nowrap" }}>
+          {line.split(" ").map((raw, i) => {
+            const k = wi++;
+            const p = ease(f, at + k * 3, at + k * 3 + 12);
+            const serif = /^\*.*\*[?!.,]?$/.test(raw);
+            const mark = /^_.*_[?!.,]?$/.test(raw);
+            const w = raw.replace(/^[*_]|[*_](?=[?!.,]?$)/g, "");
+            const hp = ease(f, at + k * 3 + 8, at + k * 3 + 22);
+            return (
+              <span key={i} style={{ position: "relative", display: "inline-block", marginRight: size * 0.22, opacity: p, transform: `translateY(${(1 - p) * 40}px) rotate(${(1 - p) * (k % 2 ? 4 : -4)}deg)` }}>
+                {mark && (
+                  <span style={{ position: "absolute", left: -size * 0.08, right: -size * 0.08, bottom: size * 0.06, height: size * 0.42, background: pal.accent, opacity: 0.35, borderRadius: size * 0.12, transform: `scaleX(${hp}) rotate(-1.5deg)`, transformOrigin: "left" }} />
+                )}
+                <span
+                  style={{
+                    position: "relative",
+                    fontFamily: serif ? SERIF : DISPLAY,
+                    fontStyle: serif ? "italic" : "normal",
+                    fontWeight: serif ? 400 : 800,
+                    fontSize: serif ? size * 1.12 : size,
+                    letterSpacing: serif ? -1 : -size / 22,
+                    color: serif ? pal.accent : pal.line,
+                  }}
+                >
+                  {w}
+                </span>
+              </span>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+/** Label penunjuk besar bernomor. */
+export const Tag: React.FC<{ pal: Pal; at: number; tx: number; ty: number; x: number; y: number; n?: number; text: string; w?: number; align?: "left" | "right"; out?: number }> = ({ pal, at, tx, ty, x, y, n, text, w = 470, align = "left", out }) => {
+  const f = useCurrentFrame();
+  const o = out !== undefined ? 1 - ease(f, out, out + 10) : 1;
+  const d = ease(f, at, at + 12);
+  const t = ease(f, at + 6, at + 18);
+  const ax = align === "left" ? x + 30 : x + w - 30;
+  const ay = y + 40;
+  return (
+    <div style={{ position: "absolute", inset: 0, opacity: o }}>
+      <svg width={1080} height={1920} style={{ position: "absolute", left: 0, top: 0 }}>
+        <path d={`M${tx} ${ty} Q ${(tx + ax) / 2} ${Math.min(ty, ay) - 40} ${tx + (ax - tx) * d} ${ty + (ay - ty) * d}`} stroke={pal.line} strokeWidth={5} fill="none" strokeLinecap="round" />
+        <circle cx={tx} cy={ty} r={14 * d} fill={pal.accent} stroke="#fff" strokeWidth={5} />
+      </svg>
+      <div style={{ position: "absolute", left: x, top: y, width: w, display: "flex", justifyContent: align === "left" ? "flex-start" : "flex-end", opacity: t, transform: `scale(${0.85 + 0.15 * t})`, transformOrigin: align === "left" ? "left center" : "right center" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "16px 24px 16px 16px", background: "#ffffff", borderRadius: 26, boxShadow: `0 12px 30px ${pal.line}26`, border: `3px solid ${pal.line}` }}>
+          {n !== undefined && (
+            <div style={{ flex: "none", width: 58, height: 58, borderRadius: 29, background: pal.accent, color: "#fff", fontFamily: DISPLAY, fontWeight: 800, fontSize: 36, display: "flex", alignItems: "center", justifyContent: "center" }}>{n}</div>
+          )}
+          <div style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 46, lineHeight: 1.05, color: pal.line, letterSpacing: -1, textWrap: "balance" }}>{tidy(text)}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/** Meter keterbacaan (0–10). */
+export const Meter: React.FC<{ pal: Pal; x: number; y: number; w: number; at: number; label: string; value: number; good?: boolean; out?: number }> = ({ pal, x, y, w, at, label, value, good, out }) => {
+  const f = useCurrentFrame();
+  const o = out !== undefined ? 1 - ease(f, out, out + 10) : 1;
+  const p = ease(f, at, at + 14);
+  const v = ease(f, at + 6, at + 30) * value;
+  const col = good ? "#2f9e5a" : "#e0503c";
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: w, padding: "20px 26px", background: "rgba(255,255,255,0.88)", borderRadius: 26, border: `3px solid ${pal.line}`, opacity: p * o, transform: `translateY(${(1 - p) * 30}px)` }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: DISPLAY, fontWeight: 800, color: pal.line }}>
+        <span style={{ fontSize: 32, whiteSpace: "nowrap" }}>{label}</span>
+        <span style={{ fontSize: 56, color: col }}>{Math.round(v)}/10</span>
+      </div>
+      <div style={{ marginTop: 10, height: 22, borderRadius: 11, background: `${pal.line}22`, overflow: "hidden" }}>
+        <div style={{ width: `${v * 10}%`, height: "100%", borderRadius: 11, background: col }} />
+      </div>
+    </div>
+  );
+};
+
+/** Stiker miring. */
+export const Sticker: React.FC<{ x: number; y: number; at: number; text: string; bg: string; color?: string; rot?: number; size?: number; out?: number }> = ({ x, y, at, text, bg, color = "#fff", rot = -8, size = 40, out }) => {
+  const f = useCurrentFrame();
+  const o = out !== undefined ? 1 - ease(f, out, out + 10) : 1;
+  const p = ease(f, at, at + 10);
+  return (
+    <div style={{ position: "absolute", left: x, top: y, padding: "14px 26px", background: bg, color, borderRadius: 16, border: "4px solid #fff", boxShadow: "0 10px 24px rgba(0,0,0,0.18)", fontFamily: DISPLAY, fontWeight: 800, fontSize: size, letterSpacing: 1, opacity: p * o, transform: `rotate(${rot}deg) scale(${1.6 - 0.6 * p})` }}>{text}</div>
   );
 };

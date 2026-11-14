@@ -3,9 +3,10 @@ import { AbsoluteFill, Html5Audio, staticFile, useCurrentFrame } from "remotion"
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
 import { Studio } from "../../lib3d/kit";
-import { Callout, Kicker, Note, Pill, Txt } from "../../lib3d/layout";
+import { Bullets, Card, Headline, Meter, Note, Pill, Sticker, Tag } from "../../lib3d/layout";
+import "../../lib3d/fonts";
 import { tonePal } from "../../lib3d/tones";
-import { Jar, Pouch, SoftShadow, Table, useLabels } from "../../lib3d/real";
+import { Jar, KepingKeripik, Pouch, SoftShadow, Table, useLabels } from "../../lib3d/real";
 import { ease } from "../../lib/ui";
 import { SANS } from "../../lib/base";
 import timeline from "./timeline.json";
@@ -20,9 +21,9 @@ type V3 = [number, number, number];
 const KEYS: { f: number; pos: V3; look: V3 }[] = [
   { f: 0, pos: [1.4, 2.4, 12], look: [0, 0.9, 0] },
   { f: S.hook.to - 10, pos: [0.8, 1.4, 8.6], look: [0, 0.7, 0] },
-  { f: S.s1.from + 30, pos: [0.35, 0.7, 6.4], look: [0, 0.6, 0] },
-  { f: S.s2.from, pos: [0.15, 0.7, 6.3], look: [0, 0.6, 0] },
-  { f: S.s2.to - 25, pos: [-0.35, 0.7, 6.4], look: [0, 0.6, 0] },
+  { f: S.s1.from + 30, pos: [0.35, 0.6, 7.2], look: [0, 0.45, 0] },
+  { f: S.s2.from, pos: [0.15, 0.6, 7.1], look: [0, 0.45, 0] },
+  { f: S.s2.to - 25, pos: [-0.35, 0.6, 7.2], look: [0, 0.45, 0] },
   { f: S.closing.from + 20, pos: [0.9, 2.2, 11], look: [0, 0.9, 0] },
   { f: TL.total, pos: [1.0, 2.3, 11.6], look: [0, 0.9, 0] },
 ];
@@ -81,6 +82,7 @@ const World: React.FC = () => {
             );
           })}
       </group>
+      <KepingKeripik position={[0.6, 0, 1.6]} />
       <SoftShadow x={-1.9} z={-1.6} w={1.6} d={1.1} o={0.3} />
       <Jar label={L.sambal} position={[-1.9, -0.6, -1.6]} rotation={[0, 0.5, 0]} />
     </>
@@ -97,39 +99,47 @@ export const Video: React.FC = () => {
       </Studio>
       {inS("hook") && (
         <>
-          <Kicker pal={pal} x={70} y={110} w={940} align="center" at={4} text="TIPS KEMASAN UMKM" />
-          <Txt x={70} y={190} w={940} at={8} align="center" size={118} color={pal.line} anim="words" out={S.hook.to - 10}>
-            Kenapa dilewati|pembeli?
-          </Txt>
+          <Headline pal={pal} y={120} at={4} size={128} text="Kenapa *dilewati*|_pembeli?_" out={S.hook.to - 10} />
+          <Sticker x={690} y={520} at={30} text="Rp15.000" bg="#ffd84d" color="#3a2a12" rot={8} out={S.hook.to - 10} />
+          <Card pal={pal} x={70} y={1560} w={940} at={at("hook", 1)} title="FAKTA DI RAK" text="Pembeli cuma melirik sebentar. Label harus menang di detik pertama." />
         </>
       )}
       {inS("s1") && (
         <>
-          <Kicker pal={pal} x={70} y={110} w={940} align="center" at={S.s1.from + 2} text="SEBELUM" />
-          <Txt x={70} y={190} w={940} at={S.s1.from + 6} align="center" size={112} color={pal.line} anim="up" out={S.s1.to - 8}>
-            Label kecil|dan pucat
-          </Txt>
-          <Callout pal={pal} at={at("s1", 1)} out={S.s1.to - 8} tx={545} ty={1340} x={60} y={1660} w={420} text="Nama produk tidak terlihat" />
-          <Callout pal={pal} at={at("s1", 2)} out={S.s1.to - 8} tx={780} ty={1180} x={600} y={560} w={420} align="right" text="Warna pucat, tenggelam di kertas kraft" />
+          <Headline pal={pal} y={110} at={S.s1.from + 4} size={124} text="Label *kecil*|_dan pucat_" out={S.s1.to - 8} />
+          <Sticker x={70} y={470} at={S.s1.from + 10} text="SEBELUM" bg="#e0503c" rot={-7} out={S.s1.to - 8} />
+          <Meter pal={pal} x={540} y={460} w={470} at={S.s1.from + 18} label="Terbaca dari jauh" value={2} out={S.s1.to - 8} />
+          <Tag pal={pal} at={at("s1", 1)} out={S.s1.to - 8} n={1} tx={545} ty={1290} x={40} y={1570} w={600} text="Nama produk tak terlihat" />
+          <Tag pal={pal} at={at("s1", 2)} out={S.s1.to - 8} n={2} tx={790} ty={1050} x={440} y={1720} w={600} align="right" text="Warnanya pucat" />
         </>
       )}
       {inS("s2") && (
         <>
-          <Kicker pal={pal} x={70} y={110} w={940} align="center" at={S.s2.from + 2} text="SESUDAH" />
-          <Txt x={70} y={190} w={940} at={S.s2.from + 6} align="center" size={112} color={pal.line} anim="scale" out={S.s2.to - 8}>
-            Nama besar,|langsung terbaca
-          </Txt>
-          <Callout pal={pal} at={at("s2", 1)} out={S.s2.to - 8} tx={560} ty={1110} x={600} y={560} w={420} align="right" text="Nama besar, warna kontras" />
-          <Callout pal={pal} at={at("s2", 2)} out={S.s2.to - 8} tx={540} ty={1496} x={60} y={1760} w={420} text="Berat bersih jelas" />
+          <Headline pal={pal} y={110} at={S.s2.from + 4} size={118} text="Nama *besar*,|_langsung terbaca_" out={S.s2.to - 8} />
+          <Sticker x={70} y={470} at={S.s2.from + 10} text="SESUDAH" bg="#2f9e5a" rot={-7} out={S.s2.to - 8} />
+          <Meter pal={pal} x={540} y={460} w={470} at={S.s2.from + 18} label="Terbaca dari jauh" value={9} good out={S.s2.to - 8} />
+          <Tag pal={pal} at={at("s2", 1)} out={S.s2.to - 8} n={1} tx={545} ty={1120} x={40} y={1570} w={620} text="Nama besar, warna kontras" />
+          <Tag pal={pal} at={at("s2", 2)} out={S.s2.to - 8} n={2} tx={545} ty={1420} x={440} y={1720} w={600} align="right" text="Berat bersih jelas" />
         </>
       )}
       {f >= S.closing.from - 4 && (
         <>
-          <Txt x={70} y={170} w={940} at={S.closing.from} align="center" size={104} color={pal.line} anim="words">
-            Sekali lirik,|langsung terbaca
-          </Txt>
-          <Pill pal={pal} x={70} y={1700} w={940} at={S.closing.from + 20} text="Simpan tips ini" />
-          <Note pal={pal} y={1815} at={S.closing.from + 30} text="*Keripik Mbok Sari dan Sambal Bu Rini hanya contoh merek fiktif." />
+          <Headline pal={pal} y={110} at={S.closing.from} size={116} text="Sekali *lirik*,|_langsung terbaca_" />
+          <Bullets
+            pal={pal}
+            x={190}
+            y={480}
+            w={760}
+            marker="check"
+            size={42}
+            items={[
+              { at: S.closing.from + 14, text: "Nama produk paling besar" },
+              { at: S.closing.from + 22, text: "Warna kontras dengan kemasan" },
+              { at: S.closing.from + 30, text: "Berat bersih jelas" },
+            ]}
+          />
+          <Pill pal={pal} x={70} y={1700} w={940} at={S.closing.from + 36} text="Simpan tips ini" />
+          <Note pal={pal} y={1815} at={S.closing.from + 40} text="*Keripik Mbok Sari dan Sambal Bu Rini hanya contoh merek fiktif." />
         </>
       )}
       <Html5Audio src={staticFile("uji-realis/audio.mp3")} />

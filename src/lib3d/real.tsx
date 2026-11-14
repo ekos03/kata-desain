@@ -517,3 +517,30 @@ export const useLabels2 = () =>
     });
     return { kue, market };
   }, []);
+
+/** Keping keripik berserakan di meja. */
+export const KepingKeripik: React.FC<{ n?: number; spread?: [number, number]; y?: number } & React.JSX.IntrinsicElements["group"]> = ({ n = 14, spread = [2.4, 1.2], y = -1.36, ...gp }) => {
+  const geo = useMemo(() => {
+    const g = new THREE.CircleGeometry(0.16, 28);
+    const p = g.attributes.position as THREE.BufferAttribute;
+    for (let i = 0; i < p.count; i++) {
+      const x = p.getX(i), yy = p.getY(i);
+      p.setZ(i, (x * x + yy * yy) * 1.6 + Math.sin(x * 20) * 0.006);
+    }
+    g.computeVertexNormals();
+    return g;
+  }, []);
+  return (
+    <group {...gp}>
+      {Array.from({ length: n }, (_, i) => {
+        const a = i * 2.39;
+        const r = 0.3 + ((i * 37) % 10) / 10;
+        return (
+          <mesh key={i} geometry={geo} position={[Math.cos(a) * r * spread[0] * 0.5, y + (i % 3) * 0.015, Math.sin(a) * r * spread[1] * 0.5]} rotation={[-Math.PI / 2 + ((i % 5) - 2) * 0.15, (i % 7) * 0.4, i]} scale={0.8 + (i % 4) * 0.15}>
+            <meshPhysicalMaterial color={i % 3 ? "#e9b44c" : "#d9902f"} roughness={0.45} clearcoat={0.5} side={THREE.DoubleSide} />
+          </mesh>
+        );
+      })}
+    </group>
+  );
+};
