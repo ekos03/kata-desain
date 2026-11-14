@@ -18,6 +18,9 @@ Targetkan selesai dalam ±60 menit (render 3D ±15 menit, jalankan di latar bela
 - Bila terkena batas pemakaian lalu dilanjutkan, **jangan mulai dari nol**: cek `git status` dan file yang sudah ada, lanjutkan dari langkah terakhir.
 - Commit lebih awal (setelah naskah + VO + timeline jadi, dan setelah `scenes.tsx` lolos lint) agar pekerjaan tidak hilang bila sesi terhenti.
 
+### Status kantor digital (live, opsional)
+Kantor NOEKANG, sayap KATA DESAIN: https://claude.ai/artifact/Fxc1g9o9KqMVer8jfGKFug — di awal dan akhir tiap langkah, tulis status lewat **ArtifactData** (`action: "update"`, `collection: "pegawai"`, `doc_id` peran): naskah `naskah-desain` (Irena) · VO `suara` · adegan 3D dan render `desainer3d` (Bima) · musik dan efek suara `musik` · cek `qc` · caption `sosmed`. Data `{status, tugas, video: "<slug>", waktu}`. Video: `collection: "video"`, `doc_id: <slug>`, sertakan `divisi: "desain"`. Bila ArtifactData tidak tersedia atau gagal, lewati tanpa menggagalkan produksi.
+
 ## 0. Persiapan
 
 ```bash
@@ -31,7 +34,7 @@ python3 -c "import numpy, soundfile, piper" 2>/dev/null || pip install -q -r pip
 ## 1. Naskah (bahasa awam, isi tetap benar)
 
 - **Penonton** (dua kelompok, pilih salah satu per video sesuai jadwal): (a) **pemula** yang ingin belajar desain grafis; (b) **pelaku UMKM/industri** yang membutuhkan jasa desain (cara memilih desainer, brief, logo, kemasan, konten promosi). Bahasa ramah, tidak menggurui, tanpa jargon.
-- **Pakai riset Silvia**: sebelum menulis, buka laporan terbaru di `content/riset/` (`ls content/riset | tail -1`), cari slug hari ini, lalu pakai usulan hook dan pola yang berhasil (hook langsung di 3 detik pertama, poin bernomor, penutup "simpan/bagikan"). Bila tidak ada catatan untuk slug ini, lanjut seperti biasa.
+- **Pakai riset Arya**: sebelum menulis, buka laporan terbaru di `content/riset/` (`ls content/riset | tail -1`), cari slug hari ini, lalu pakai usulan hook dan pola yang berhasil (hook langsung di 3 detik pertama, poin bernomor, penutup "simpan/bagikan"). Bila tidak ada catatan untuk slug ini, lanjut seperti biasa.
 
 Tulis `content/<slug>/naskah.json`:
 
