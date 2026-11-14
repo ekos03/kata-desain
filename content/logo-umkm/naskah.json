@@ -1,0 +1,15 @@
+{
+ "slug": "logo-umkm",
+ "title": "Tips Logo UMKM agar Mudah Diingat",
+ "voice": {"engine": "piper-lokal", "catatan": "VO dibuat dengan TTS gratis lokal; naskah diekspor untuk ElevenLabs"},
+ "segments": [
+  {"id": "hook", "text": "Logo usahamu sering dilupakan pembeli? Yuk, bikin logo yang sekali lihat langsung nempel!", "beats": ["dilupakan", "langsung nempel"]},
+  {"id": "masalah", "text": "Logo yang ramai dan rumit susah dikenali dari jauh. Akhirnya pembeli cuma ingat produknya, bukan nama usahamu.", "beats": ["susah dikenali", "bukan nama usahamu"]},
+  {"id": "s1", "text": "Pertama, buat bentuknya sederhana. Kalau bisa digambar ulang dengan tangan dalam beberapa detik, artinya gampang diingat.", "beats": ["sederhana", "digambar ulang"]},
+  {"id": "s2", "text": "Kedua, cek di ukuran kecil. Logo harus tetap jelas di foto profil, stiker, dan label kemasan.", "beats": ["ukuran kecil", "label kemasan"]},
+  {"id": "s3", "text": "Ketiga, batasi warna, cukup dua atau tiga saja. Lalu pastikan logo tetap bagus dalam hitam putih.", "beats": ["dua atau tiga", "hitam putih"]},
+  {"id": "s4", "text": "Keempat, pilih huruf yang mudah dibaca, dan jangan pakai lebih dari dua jenis huruf.", "beats": ["mudah dibaca", "dua jenis huruf"]},
+  {"id": "s5", "text": "Kelima, tunjukkan ciri khas usahamu, jangan meniru logo merek terkenal.", "beats": ["ciri khas", "jangan meniru"]},
+  {"id": "outro", "text": "Pakai logo yang sama di kemasan, spanduk, sampai media sosial. Kalau pakai jasa desainer, minta juga file aslinya, ya!", "beats": ["logo yang sama", "file aslinya"]}
+ ]
+}
