@@ -7,7 +7,7 @@ description: Produksi satu video explainer 9:16 kanal KATA DESAIN (tips desain g
 
 Argumen: `topik: <judul>` dan opsional `slug: <slug>`. Kalau tidak ada, ambil baris hari ini dari `content/jadwal.md`.
 
-Targetkan selesai dalam ±90 menit (render 3D ±40–45 menit, jalankan di latar belakang). Kerjakan berurutan; jangan lewati pengecekan visual.
+Targetkan selesai dalam ±60 menit (render 3D ±15 menit, jalankan di latar belakang). Kerjakan berurutan; jangan lewati pengecekan visual.
 
 ### Mode hemat (wajib — kuota pemakaian Claude terbatas)
 - **Jangan membaca ulang file besar** yang tidak perlu. Baca `src/videos/logo-umkm/scenes.tsx` (video referensi) sekali, salin polanya; pakai `src/lib3d/kit.tsx` (`Studio`, `Gloss`, `Emblem`, `Cup`, `RoundedBox`, `mix`, `toMono`) dan `src/lib/ui` (`Title`, `InfoCard`, `KeyPill`) daripada menulis ulang dari nol.
@@ -72,20 +72,21 @@ python3 pipeline/timeline.py <slug>   # -> src/videos/<slug>/timeline.json
 ## 3. Kode video `src/videos/<slug>/`
 
 Salin pola dari `src/videos/logo-umkm/` (baca `theme.ts`, `index.tsx`, dan `scenes.tsx` dulu) dan `src/lib3d/kit.tsx`. Buat:
-- `theme.ts` — `TL`, `PAL` (satu palet berbeda per scene dari `lib/palettes.ts`; `closing: PALETTES.plum`), `scene()`.
+- `theme.ts` — `TL`, `TONE`, `PAL` dari `tonePal(TONE, i)` (`src/lib3d/tones.ts`), `scene()`. **Satu tone lembut per video**, bergiliran: pink → oranye → lavender → mint → langit → mentega → sage → persik → ulang. Lihat tone video sebelumnya di `src/videos/*/theme.ts` lalu pakai tone berikutnya.
 - `scenes.tsx` — satu komponen per scene, memakai `lib/ui` (`Title`, `KeyPill`, `InfoCard`, `ease`, `lerp`, `tidy`), `lib/icons`, dan objek 3D di dalam `<Studio>` dari `lib3d/kit`.
 - `index.tsx` — `ORDER` (variasikan `reveal`: circle, wipeDown, wipeLeft, diagonal, wipeUp, iris), `Video`, `meta`; closing = `<Closing pal={PAL.closing} />` dari `lib/Closing`.
 - Tambahkan ke `src/videos/registry.ts`.
 
 Aturan visual (wajib, ini permintaan pemilik kanal):
-- Latar **gelap & berbeda warna** tiap scene. Fokus pada **animasi**, teks sedikit tapi **besar**.
-- **Cover (hook):** judul tipografis besar dan menarik (kata bertumpuk, satu kata/angka raksasa bergradasi), label kecil (mis. "TIPS LOGO UMKM", "BELAJAR DESAIN"), objek 3D utama yang bergerak, dan bagian bawah terisi (mis. baris ikon "N TAHAP PENTING").
-- **Tiap tahap:** angka besar (`num`) + judul pendek + `sub` satu baris + satu `InfoCard` (info tambahan singkat) dan/atau `KeyPill` (angka kunci). Tidak boleh ada area besar yang kosong.
+- **Warna lembut (*soft*)**: latar terang pastel dari tone video, teks gelap senada tone, aksen tone. Jangan latar gelap.
+- **Tata letak bebas, bukan pola NOEKANG**: jangan pakai `Title`/`InfoCard`/`KeyPill` dari `lib/ui`. Pakai `src/lib3d/layout.tsx` (`Txt`, `Kicker`, `BigNum`, `Callout`, `Bullets`, `Card`, `Pill`, `Note`) dan taruh teks di mana saja: rata kiri, tengah, atau kanan; atas, tengah, atau bawah; boleh miring sedikit; keterangan dengan garis penunjuk ke objek 3D. **Tiap adegan harus punya susunan berbeda** dari adegan sebelumnya (lihat `src/videos/logo-umkm/scenes.tsx`).
+- **Cover (hook): judul rata tengah**, besar, satu kata kunci raksasa bergradasi, label kecil di atasnya, objek 3D utama bergerak, dan ajakan di bawah.
+- **Info lebih banyak, tetap jelas**: tiap tahap = judul + 2–3 poin singkat (`Bullets`) atau kartu tips praktis (`Card`, mis. "CARA CEK") + keterangan pada objek (`Callout`). Teks minimal 36 px, kontras cukup, tidak menutupi objek utama.
 - **Animasi tiap tahap harus berbeda gaya** (meledak lalu tersisa satu, menggambar garis, mengecil ke beberapa benda, keping warna jatuh, huruf merapi, stempel silang, *carousel* berputar, partikel, dsb.) dan **disinkronkan ke `beats`**.
-- **Outro:** judul besar tipografis **rata tengah**, rapat (lihat Outro di referensi), plus `KeyPill` ajakan dan catatan kecil "Angka bersifat umum…".
+- **Outro:** judul besar rata tengah, daftar cek singkat, `Pill` ajakan, dan `Note` kecil (mis. "Logo … hanya contoh").
 - **EYD:** huruf kapital judul benar, kata asing *miring*, "dan" bukan "&", bilangan sesuai kaidah. Semua teks lewat `tidy()` / `textWrap: "balance"` agar **tidak ada kata menggantung** di akhir baris.
 - Tidak ada teks/objek bertumpuk atau terpotong tepi layar. Area aman: kiri/kanan 64 px, progress bar di bawah (bottom 48).
-- Teks `KeyPill` ≤ 30 karakter (harus satu baris). Badge/kartu harus sudah tampil penuh ≥ 1 dtk sebelum scene berakhir — jangan jadwalkan animasi di 15 frame terakhir scene.
+- Teks `Pill` ≤ 30 karakter (harus satu baris). Badge/kartu harus sudah tampil penuh ≥ 1 dtk sebelum scene berakhir — jangan jadwalkan animasi di 15 frame terakhir scene.
 - Spasi tak terpisah: pakai `const NBSP = String.fromCharCode(160)` di template literal (ESLint menolak karakter NBSP mentah). Untuk teks biasa cukup `tidy()`.
 - Efek sekali lewat (kilau, partikel) harus disembunyikan setelah selesai agar tidak tersisa di tepi layar.
 - **3D halus, bukan *low-poly***: geometri bersegmen tinggi (bola/silinder ≥ 64 segmen, `RoundedBox` `smoothness` ≥ 6, ekstrusi dengan *bevel*), bahan mengilap `Gloss` (clearcoat), cahaya studio dari `Studio`. Hindari `transmission` (kaca) dan bayangan real-time karena memperlambat render.

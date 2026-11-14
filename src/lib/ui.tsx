@@ -351,8 +351,8 @@ export const Progress: React.FC<{
             i === step
               ? color
               : i < step || step > total
-                ? "rgba(255,255,255,0.55)"
-                : "rgba(255,255,255,0.15)",
+                ? `${color}88`
+                : `${color}26`,
         }}
       />
     ))}

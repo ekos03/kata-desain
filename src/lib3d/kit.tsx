@@ -118,7 +118,7 @@ export const Emblem: React.FC<{
       <mesh geometry={geo.cup} position={[0, -0.14, 0.24]}>
         <Gloss color={c("#fff1dc")} opacity={opacity} />
       </mesh>
-      <mesh position={[0.62, -0.38, 0.24]}>
+      <mesh position={[0.5, -0.1, 0.24]} rotation={[0, 0, -Math.PI / 2]}>
         <torusGeometry args={[0.15, 0.05, 24, 64, Math.PI]} />
         <meshPhysicalMaterial color={c("#fff1dc")} clearcoat={1} roughness={0.2} transparent={opacity < 1} opacity={opacity} />
       </mesh>
