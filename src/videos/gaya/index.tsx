@@ -5,6 +5,7 @@ import { useThree } from "@react-three/fiber";
 import { Gloss, RoundedBox, Studio } from "../../lib3d/kit";
 import { Callout, Card, Kicker, Note, Txt } from "../../lib3d/layout";
 import { tonePal } from "../../lib3d/tones";
+import { Jar, Pouch, Sachet, SoftShadow, Table, useLabels } from "../../lib3d/real";
 import { SANS } from "../../lib/base";
 
 // Contoh gaya (style frame) untuk memilih arah visual KATA DESAIN.
@@ -329,6 +330,97 @@ export const GayaMeja: React.FC = () => {
           {n.t}
         </div>
       ))}
+    </AbsoluteFill>
+  );
+};
+
+// ============ 4. REALIS: produk UMKM di meja kayu ============
+const FogTo: React.FC<{ color: string; near: number; far: number }> = ({ color, near, far }) => {
+  const { scene } = useThree();
+  useMemo(() => {
+    scene.fog = new THREE.Fog(color, near, far);
+  }, [scene, color, near, far]);
+  return null;
+};
+export const GayaRealis: React.FC = () => {
+  const L = useLabels();
+  return (
+    <AbsoluteFill style={{ background: pal.bg2, fontFamily: SANS }}>
+      <Kicker pal={pal} x={70} y={100} w={940} align="center" at={-30} text="TIPS KEMASAN UMKM" />
+      <Txt x={70} y={180} w={940} at={-30} align="center" size={112} color={pal.line}>
+        Kemasan yang|bikin mampir
+      </Txt>
+      <Studio bg={pal.bg2} top={430} height={1490} cam={[0, 1.4, 10.5]} fov={32}>
+        <FogTo color={pal.bg2} near={13} far={21} />
+        <Table />
+        <SoftShadow x={-0.2} z={0.1} w={2.6} d={1.3} o={0.55} />
+        <SoftShadow x={1.3} z={1.2} w={1.9} d={1.4} o={0.5} />
+        <SoftShadow x={-1.35} z={2.0} w={1.6} d={1.1} o={0.4} />
+        <Pouch label={L.keripik} position={[-0.2, -0.05, 0]} rotation={[0, 0.18, 0]} />
+        <Jar label={L.sambal} position={[1.3, -0.6, 1.2]} rotation={[0, -0.35, 0]} />
+        <Sachet print={L.kopi} position={[-1.35, -1.32, 2.0]} rotation={[-Math.PI / 2 + 0.06, 0, 0.45]} />
+      </Studio>
+      <Callout pal={pal} at={-30} tx={470} ty={1140} x={60} y={640} w={380} text="Nama produk paling besar" />
+      <Callout pal={pal} at={-30} tx={840} ty={1400} x={600} y={1600} w={420} align="right" text="Label melingkar, mudah dibaca" />
+      <Note pal={pal} y={1800} at={-30} text="*Merek pada contoh ini fiktif." />
+    </AbsoluteFill>
+  );
+};
+
+// Versi 2: satu produk dekat (close-up), realis
+export const GayaRealisDekat: React.FC = () => {
+  const L = useLabels();
+  return (
+    <AbsoluteFill style={{ background: pal.bg2, fontFamily: SANS }}>
+      <Kicker pal={pal} x={70} y={100} w={940} align="center" at={-30} text="TIPS KEMASAN UMKM" />
+      <Txt x={70} y={180} w={940} at={-30} align="center" size={108} color={pal.line}>
+        Tulis yang|penting saja
+      </Txt>
+      <Studio bg={pal.bg2} top={430} height={1490} cam={[0.4, 0.8, 6.4]} fov={32}>
+        <FogTo color={pal.bg2} near={9} far={15} />
+        <Table />
+        <SoftShadow x={0} z={0} w={2.8} d={1.4} o={0.6} />
+        <Pouch label={L.keripik} position={[0, -0.05, 0]} rotation={[0, 0.32, 0]} />
+        <SoftShadow x={-1.9} z={-1.6} w={1.6} d={1.1} o={0.3} />
+        <Jar label={L.sambal} position={[-1.9, -0.6, -1.6]} rotation={[0, 0.5, 0]} />
+      </Studio>
+      <Callout pal={pal} at={-30} tx={600} ty={1050} x={640} y={640} w={380} align="right" text="Nama usaha dan produk" />
+      <Callout pal={pal} at={-30} tx={575} ty={1385} x={600} y={1560} w={420} align="right" text="Berat bersih yang jelas" />
+      <Callout pal={pal} at={-30} tx={600} ty={1515} x={60} y={1660} w={420} text="Klaim singkat: tanpa pengawet, halal" />
+      <Note pal={pal} y={1820} at={-30} text="*Merek pada contoh ini fiktif." />
+    </AbsoluteFill>
+  );
+};
+
+// Versi 3: di rak toko, sebelum dan sesudah
+export const GayaRealisRak: React.FC = () => {
+  const L = useLabels();
+  return (
+    <AbsoluteFill style={{ background: pal.bg2, fontFamily: SANS }}>
+      <Kicker pal={pal} x={70} y={100} w={940} align="center" at={-30} text="DI RAK TOKO" />
+      <Txt x={70} y={180} w={940} at={-30} align="center" size={108} color={pal.line}>
+        Mana yang|kamu ambil?
+      </Txt>
+      <Studio bg={pal.bg2} top={430} height={1490} cam={[0, 0.9, 13]} fov={32}>
+        <FogTo color={pal.bg2} near={16} far={24} />
+        {/* rak kayu */}
+        <RoundedBox args={[5.6, 0.18, 2.0]} radius={0.05} smoothness={4} position={[0, -1.5, 0]}>
+          <meshPhysicalMaterial color="#b98256" roughness={0.6} clearcoat={0.3} />
+        </RoundedBox>
+        {[-1.25, 1.25].map((x, i) => (
+          <group key={x}>
+            <SoftShadow x={x} z={0} y={-1.4} w={2.4} d={1.2} o={0.5} />
+            <Pouch label={i ? L.keripik : L.polos} labelScale={i ? 1 : 0.55} position={[x, -0.05, 0]} rotation={[0, i ? -0.15 : 0.15, 0]} />
+          </group>
+        ))}
+      </Studio>
+      <Txt x={80} y={1420} w={420} at={-30} align="center" size={40} weight={800} color={pal.line}>
+        Sebelum: label kecil, pucat
+      </Txt>
+      <Txt x={580} y={1420} w={420} at={-30} align="center" size={40} weight={800} color={pal.accent}>
+        Sesudah: nama jelas, warna kontras
+      </Txt>
+      <Note pal={pal} y={1820} at={-30} text="*Merek pada contoh ini fiktif." />
     </AbsoluteFill>
   );
 };
