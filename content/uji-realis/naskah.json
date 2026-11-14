@@ -1,0 +1,10 @@
+{
+ "slug": "uji-realis",
+ "title": "Uji Gaya Realis: Label Kemasan",
+ "voice": {"engine": "piper-lokal", "catatan": "Video uji gaya, VO TTS gratis lokal"},
+ "segments": [
+  {"id": "hook", "text": "Kemasan keripikmu sering dilewati pembeli? Coba lihat bedanya.", "beats": ["dilewati", "lihat bedanya"]},
+  {"id": "s1", "text": "Sebelum: labelnya kecil dan pucat, nama produknya susah terbaca.", "beats": ["kecil dan pucat", "susah terbaca"]},
+  {"id": "s2", "text": "Sesudah: nama dibuat besar, warnanya kontras, dan berat bersihnya jelas. Sekali lirik, langsung terbaca!", "beats": ["nama dibuat besar", "berat bersihnya", "langsung terbaca"]}
+ ]
+}
