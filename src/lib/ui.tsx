@@ -11,15 +11,26 @@ import { clamp, MONO, Pal, SANS } from "./base";
 
 // ---------- teks rapi (EYD, tanpa kata menggantung) ----------
 const NB = " ";
+// Kata tugas & kata depan selalu menempel ke kata sesudahnya (tidak berdiri di ujung baris).
 const TUGAS =
-  /(?<=^|\s)(dan|atau|di|ke|yang|untuk|serta|dengan|oleh|dari|pada|lalu|hanya|bukan)\s(?=\S)/g;
-export const tidy = (s: string) =>
-  s
-    .replace(/(\d)–(\d)/g, "$1\u2060–\u2060$2")
-    .replace(/(\d)\s(?=(cm|m|kg|hari|lantai)\b)/g, `$1${NB}`)
-    .replace(/([≥≈±])\s(?=\S)/g, `$1${NB}`)
-    .replace(TUGAS, `$1${NB}`)
-    .replace(/\s(\S{1,3})$/, `${NB}$1`);
+  /(?<=^|\s)(dan|atau|di|ke|yang|untuk|serta|dengan|oleh|dari|pada|lalu|hanya|bukan|agar|supaya|tanpa|seperti|saat|tetap|jadi|per|lebih|tidak|juga|sudah|cukup|si|sang|para|akan|bisa|harus|jangan|walau|tiap|setiap|satu|dua|tiga|empat|lima|maksimal|minimal|sekitar|hingga|sampai|antara|ini|itu)\s(?=\S)/gi;
+// Frasa padu yang tidak boleh dipisah baris.
+const FRASA = [
+  "hitam putih", "media sosial", "foto profil", "label kemasan", "ujung jempol", "hak merek", "merek dagang",
+  "file asli", "file vektor", "nama usaha", "nama usahamu", "huruf tebal", "huruf biasa", "jenis huruf", "ciri khas",
+  "Kopi Senja", "asal daerah", "nama pemilik", "apa pun", "di mana", "sekecil apa", "jasa desain", "beberapa detik",
+];
+export const tidy = (s: string) => {
+  let t = s
+    .replace(/(\d)–(\d)/g, "$1⁠–⁠$2")
+    .replace(/(\d[\d.,–⁠]*)\s(?=\S)/g, `$1${NB}`)
+    .replace(/([≥≈±*])\s(?=\S)/g, `$1${NB}`);
+  for (const fr of FRASA) t = t.replace(new RegExp(fr.replace(/ /g, "\\s"), "gi"), (m) => m.replace(/\s/g, NB));
+  t = t.replace(TUGAS, `$1${NB}`);
+  // tidak ada kata tunggal yang menggantung di baris terakhir
+  t = t.replace(/\s(\S{1,9})$/, `${NB}$1`);
+  return t;
+};
 
 // ---------- util animasi ----------
 export const useSpr = (delay = 0, damping = 14, mass = 1) => {
@@ -39,42 +50,7 @@ export const Backdrop: React.FC<{
   pal: Pal;
   glowX?: number;
   glowY?: number;
-}> = ({ pal, glowX = 540, glowY = 1000 }) => {
-  const f = useCurrentFrame();
-  const drift = Math.sin(f / 40) * 40;
-  return (
-    <AbsoluteFill
-      style={{
-        background: `linear-gradient(180deg, ${pal.bg1} 0%, ${pal.bg2} 100%)`,
-      }}
-    >
-      <svg width={1080} height={1920} style={{ position: "absolute" }}>
-        <defs>
-          <radialGradient id={`glow-${pal.accent}`} cx="0.5" cy="0.5" r="0.5">
-            <stop offset="0" stopColor={pal.accent} stopOpacity={0.22} />
-            <stop offset="1" stopColor={pal.accent} stopOpacity={0} />
-          </radialGradient>
-          <pattern
-            id={`dots-${pal.accent}`}
-            width={48}
-            height={48}
-            patternUnits="userSpaceOnUse"
-            y={(f * 0.5) % 48}
-          >
-            <circle cx={2} cy={2} r={2} fill={pal.line} opacity={0.09} />
-          </pattern>
-        </defs>
-        <rect width={1080} height={1920} fill={`url(#dots-${pal.accent})`} />
-        <circle
-          cx={glowX + drift}
-          cy={glowY}
-          r={620}
-          fill={`url(#glow-${pal.accent})`}
-        />
-      </svg>
-    </AbsoluteFill>
-  );
-};
+}> = ({ pal }) => <AbsoluteFill style={{ background: pal.bg2 }} />;
 
 // ---------- judul: nomor besar + judul pendek ----------
 export const Title: React.FC<{

@@ -45,7 +45,7 @@ export const Txt: React.FC<{
   const f = useCurrentFrame();
   const p = ease(f, at, at + 16);
   const o = out !== undefined ? 1 - ease(f, out, out + 10) : 1;
-  const words = tidy(children).split(" ");
+  const lines = children.split("|").map((l) => tidy(l.trim()));
   const common: React.CSSProperties = {
     position: "absolute",
     left: x,
@@ -60,17 +60,26 @@ export const Txt: React.FC<{
     color,
     fontStyle: italic ? "italic" : undefined,
     textWrap: "balance",
+    hyphens: "none",
+    wordBreak: "normal",
     transformOrigin: align === "right" ? "right center" : align === "center" ? "center" : "left center",
   };
   if (anim === "words")
     return (
       <div style={{ ...common, transform: `rotate(${rot}deg)`, opacity: o }}>
-        {words.map((wd, i) => {
-          const q = interpolate((f - at) / 4 - i, [0, 1], [0, 1], clamp);
+        {lines.map((l, li) => {
+          const before = lines.slice(0, li).join(" ").split(" ").filter(Boolean).length;
           return (
-            <span key={i} style={{ display: "inline-block", opacity: q, transform: `translateY(${(1 - q) * 30}px)`, marginRight: size * 0.24 }}>
-              {wd}
-            </span>
+            <div key={li}>
+              {l.split(" ").map((wd, i) => {
+                const q = interpolate((f - at) / 4 - (before + i), [0, 1], [0, 1], clamp);
+                return (
+                  <span key={i} style={{ display: "inline-block", opacity: q, transform: `translateY(${(1 - q) * 30}px)`, marginRight: size * 0.24 }}>
+                    {wd}
+                  </span>
+                );
+              })}
+            </div>
           );
         })}
       </div>
@@ -78,9 +87,11 @@ export const Txt: React.FC<{
   return (
     <div style={{ ...common, opacity: p * o, transform: `${enter(anim, p)} rotate(${rot}deg)` }}>
       {bg ? (
-        <span style={{ background: bg, padding: "0.06em 0.28em", borderRadius: size * 0.22, boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>{tidy(children)}</span>
+        <span style={{ background: bg, padding: "0.06em 0.28em", borderRadius: size * 0.22, boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>{lines.join(" ")}</span>
       ) : (
-        tidy(children)
+        lines.map((l, i) => (
+          <div key={i}>{l}</div>
+        ))
       )}
     </div>
   );
@@ -92,7 +103,7 @@ export const Kicker: React.FC<{ pal: Pal; x: number; y: number; at: number; text
   const p = ease(f, at, at + 14);
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, textAlign: align, opacity: p, transform: `translateY(${(1 - p) * 20}px)` }}>
-      <span style={{ display: "inline-flex", alignItems: "center", gap: 14, fontFamily: SANS, fontWeight: 800, fontSize: 34, letterSpacing: 5, color: pal.accent, background: "rgba(255,255,255,0.75)", padding: "12px 26px", borderRadius: 999, boxShadow: `0 6px 24px ${pal.accent}22` }}>
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 14, fontFamily: SANS, fontWeight: 800, fontSize: 34, letterSpacing: 5, color: pal.accent, padding: "12px 26px", borderRadius: 999, background: "rgba(255,255,255,0.38)", backdropFilter: "blur(18px) saturate(160%)", WebkitBackdropFilter: "blur(18px) saturate(160%)", border: "1.5px solid rgba(255,255,255,0.75)", boxShadow: `inset 0 1px 0 rgba(255,255,255,0.9), 0 6px 24px ${pal.accent}22` }}>
         <span style={{ width: 14, height: 14, borderRadius: 7, background: pal.accent }} />
         {text}
       </span>
@@ -127,7 +138,7 @@ export const Callout: React.FC<{ pal: Pal; at: number; tx: number; ty: number; x
         <circle cx={tx} cy={ty} r={22 * d} fill="none" stroke={pal.accent} strokeWidth={3} opacity={0.5} />
       </svg>
       <div style={{ position: "absolute", left: x, top: y, width: w, textAlign: align, fontFamily: SANS, fontWeight: 700, fontSize: 36, lineHeight: 1.15, color: pal.line, opacity: t, transform: `translateY(${(1 - t) * 12}px)`, textWrap: "balance" }}>
-        <span style={{ background: "rgba(255,255,255,0.8)", padding: "6px 14px", borderRadius: 14, boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>{tidy(text)}</span>
+        <span style={{ background: "rgba(255,255,255,0.5)", border: "1.5px solid rgba(255,255,255,0.8)", padding: "6px 14px", borderRadius: 16, boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>{tidy(text)}</span>
       </div>
     </div>
   );
@@ -158,7 +169,7 @@ export const Card: React.FC<{ pal: Pal; x: number; y: number; w: number; at: num
   const f = useCurrentFrame();
   const p = ease(f, at, at + 16);
   return (
-    <div style={{ position: "absolute", left: x, top: y, width: w, padding: "26px 32px", borderRadius: 34, background: "rgba(255,255,255,0.82)", boxShadow: `0 14px 40px ${pal.line}1f`, opacity: p, transform: `translateY(${(1 - p) * 40}px) rotate(${rot}deg)` }}>
+    <div style={{ position: "absolute", left: x, top: y, width: w, padding: "26px 32px", borderRadius: 34, background: "rgba(255,255,255,0.38)", backdropFilter: "blur(18px) saturate(160%)", WebkitBackdropFilter: "blur(18px) saturate(160%)", border: "1.5px solid rgba(255,255,255,0.75)", boxShadow: `inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -10px 30px rgba(255,255,255,0.25), 0 14px 40px ${pal.line}1f`, opacity: p, transform: `translateY(${(1 - p) * 40}px) rotate(${rot}deg)` }}>
       {title && <div style={{ fontFamily: SANS, fontWeight: 800, fontSize: 30, letterSpacing: 3, color: pal.accent, marginBottom: 8 }}>{title}</div>}
       <div style={{ fontFamily: SANS, fontWeight: 650, fontSize: 38, lineHeight: 1.2, color: pal.line, textWrap: "balance" }}>{tidy(text)}</div>
     </div>
@@ -171,7 +182,7 @@ export const Pill: React.FC<{ pal: Pal; x: number; y: number; w: number; at: num
   const p = ease(f, at, at + 12);
   return (
     <div style={{ position: "absolute", left: x, top: y, width: w, textAlign: align, opacity: p, transform: `scale(${0.8 + 0.2 * p})` }}>
-      <span style={{ display: "inline-block", fontFamily: SANS, fontWeight: 800, fontSize: 46, color: "#fff", background: pal.accent, padding: "16px 40px", borderRadius: 999, boxShadow: `0 10px 30px ${pal.accent}55` }}>{tidy(text)}</span>
+      <span style={{ display: "inline-block", fontFamily: SANS, fontWeight: 800, fontSize: 46, color: "#fff", background: `linear-gradient(180deg, ${pal.accent}dd, ${pal.accent}aa)`, backdropFilter: "blur(14px)", border: "1.5px solid rgba(255,255,255,0.6)", padding: "16px 40px", borderRadius: 999, boxShadow: `inset 0 2px 0 rgba(255,255,255,0.55), 0 10px 30px ${pal.accent}55` }}>{tidy(text)}</span>
     </div>
   );
 };

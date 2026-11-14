@@ -5,14 +5,15 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 
 // ---------- Studio 3D: kanvas transparan di area panggung, lingkungan cahaya studio ----------
-const Env: React.FC = () => {
+const Env: React.FC<{ bg?: string }> = ({ bg }) => {
   const { gl, scene } = useThree();
   useMemo(() => {
+    if (bg) scene.background = new THREE.Color(bg);
     const pm = new THREE.PMREMGenerator(gl);
     scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture;
     gl.toneMapping = THREE.ACESFilmicToneMapping;
     gl.toneMappingExposure = 1.05;
-  }, [gl, scene]);
+  }, [gl, scene, bg]);
   return null;
 };
 
@@ -22,7 +23,8 @@ export const Studio: React.FC<{
   height?: number;
   cam?: [number, number, number];
   fov?: number;
-}> = ({ children, top = 600, height = 1000, cam = [0, 0.3, 8], fov = 38 }) => (
+  bg?: string;
+}> = ({ children, top = 600, height = 1000, cam = [0, 0.3, 8], fov = 38, bg }) => (
   <div style={{ position: "absolute", left: 0, top, width: 1080, height }}>
     <ThreeCanvas
       width={1080}
@@ -32,7 +34,7 @@ export const Studio: React.FC<{
       camera={{ position: cam, fov }}
       style={{ background: "transparent" }}
     >
-      <Env />
+      <Env bg={bg} />
       <ambientLight intensity={0.25} />
       <directionalLight position={[4, 6, 5]} intensity={1.4} />
       <directionalLight position={[-5, 2, -3]} intensity={0.6} color="#b9a4ff" />
@@ -47,17 +49,30 @@ export const Gloss: React.FC<{
   rough?: number;
   metal?: number;
   opacity?: number;
-}> = ({ color, rough = 0.2, metal = 0.05, opacity = 1 }) => (
-  <meshPhysicalMaterial
-    color={color}
-    roughness={rough}
-    metalness={metal}
-    clearcoat={1}
-    clearcoatRoughness={0.08}
-    transparent={opacity < 1}
-    opacity={opacity}
-  />
-);
+  solid?: boolean;
+}> = ({ color, rough = 0.2, metal = 0.05, opacity = 1, solid = false }) =>
+  solid ? (
+    <meshPhysicalMaterial color={color} roughness={rough} metalness={metal} clearcoat={1} clearcoatRoughness={0.08} transparent={opacity < 1} opacity={opacity} />
+  ) : (
+    // Gaya "liquid glass": kaca bening berwarna, tebal, berkilau pelangi tipis.
+    <meshPhysicalMaterial
+      color={color}
+      roughness={0.06}
+      metalness={0}
+      transmission={0.92}
+      thickness={0.9}
+      ior={1.45}
+      attenuationColor={color}
+      attenuationDistance={1.1}
+      clearcoat={1}
+      clearcoatRoughness={0.04}
+      iridescence={0.35}
+      iridescenceIOR={1.3}
+      specularIntensity={1}
+      transparent={opacity < 1}
+      opacity={opacity}
+    />
+  );
 
 export const mix = (a: string, b: string, t: number) =>
   "#" + new THREE.Color(a).lerp(new THREE.Color(b), Math.min(1, Math.max(0, t))).getHexString();
@@ -106,17 +121,17 @@ export const Emblem: React.FC<{
     <group {...g}>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <cylinderGeometry args={[1.15, 1.15, 0.22, 128]} />
-        <Gloss color={mono > 0.5 ? mix("#3b1f5e", "#111111", mono) : "#3b1f5e"} opacity={opacity} />
+        <Gloss color={mix("#9b7be0", "#5a5a5a", mono)} opacity={opacity} />
       </mesh>
       <mesh position={[0, 0, 0.11]}>
         <torusGeometry args={[1.08, 0.06, 32, 160]} />
-        <Gloss color={c("#f6c453")} metal={0.6} rough={0.15} opacity={opacity} />
+        <Gloss color={c("#f6c453")} metal={0.6} rough={0.15} opacity={opacity} solid />
       </mesh>
       <mesh geometry={geo.sun} position={[0, 0.22, 0.2]}>
-        <Gloss color={c("#ff8a3d")} opacity={opacity} />
+        <Gloss color={c("#ff8a3d")} opacity={opacity} solid />
       </mesh>
       <mesh geometry={geo.cup} position={[0, -0.14, 0.24]}>
-        <Gloss color={c("#fff1dc")} opacity={opacity} />
+        <Gloss color={c("#fff1dc")} opacity={opacity} solid />
       </mesh>
       <mesh position={[0.5, -0.1, 0.24]} rotation={[0, 0, -Math.PI / 2]}>
         <torusGeometry args={[0.15, 0.05, 24, 64, Math.PI]} />
@@ -144,11 +159,11 @@ export const Cup: React.FC<React.JSX.IntrinsicElements["group"]> = (g) => {
   return (
     <group {...g}>
       <mesh geometry={geo}>
-        <meshPhysicalMaterial color="#f7f3ee" roughness={0.25} clearcoat={1} clearcoatRoughness={0.05} side={THREE.DoubleSide} />
+        <Gloss color="#ffd6e6" />
       </mesh>
       <mesh position={[0.98, 0, 0]} rotation={[0, 0, -Math.PI / 2]}>
         <torusGeometry args={[0.38, 0.09, 32, 96, Math.PI]} />
-        <meshPhysicalMaterial color="#f7f3ee" roughness={0.25} clearcoat={1} />
+        <Gloss color="#ffd6e6" />
       </mesh>
       <mesh position={[0, 0.7, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[0.8, 96]} />

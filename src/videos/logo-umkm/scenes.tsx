@@ -5,7 +5,7 @@ import { Text3D, Center } from "@react-three/drei";
 import { SANS } from "../../lib/base";
 import { ease, lerp } from "../../lib/ui";
 import { Cup, Emblem, Gloss, mix, RoundedBox, Studio, toMono } from "../../lib3d/kit";
-import { BigNum, Bullets, Callout, Card, Kicker, Note, Pill, Txt } from "../../lib3d/layout";
+import { Bullets, Callout, Card, Kicker, Note, Pill, Txt } from "../../lib3d/layout";
 import helvB from "../../lib3d/fonts/helvetiker_bold.typeface.json";
 import helvR from "../../lib3d/fonts/helvetiker_regular.typeface.json";
 import gentB from "../../lib3d/fonts/gentilis_bold.typeface.json";
@@ -101,7 +101,7 @@ export const Hook: React.FC = () => {
       <Txt x={70} y={590} w={940} at={30} align="center" size={50} weight={700} color={pal.line} anim="fade">
         di kepala pembeli
       </Txt>
-      <Studio top={660} height={980} cam={[0, 0.4, 7]}>
+      <Studio bg={pal.bg2} top={660} height={980} cam={[0, 0.4, 7]}>
         <Cup position={[0.3, -0.7, 0]} rotation={[0.15, -0.5 + f / 120, 0]} scale={1.5} />
         {gone < 1 && (
           <mesh position={[0.3, -0.6, 1.4]} scale={0.55 * (1 - gone)}>
@@ -132,17 +132,18 @@ export const Masalah: React.FC = () => {
   const prod = ease(f, b2 - 50, b2 - 15);
   return (
     <>
-      <Txt x={60} y={130} w={960} at={4} align="right" size={150} color={pal.accent} rot={-4} anim="right">
+      <Kicker pal={pal} x={70} y={110} w={940} align="center" at={2} text="MASALAHNYA" />
+      <Txt x={70} y={190} w={940} at={4} align="center" size={140} color={pal.accent} anim="scale">
         Terlalu ramai?
       </Txt>
-      <Txt x={70} y={500} w={620} at={14} size={46} weight={700} color={pal.line} lh={1.15}>
+      <Txt x={150} y={360} w={780} at={14} align="center" size={46} weight={700} color={pal.line} lh={1.15}>
         Logo yang penuh hiasan susah dikenali dari jauh.
       </Txt>
-      <Studio top={600} height={900} cam={[0, 0.2, 8]}>
+      <Studio bg={pal.bg2} top={600} height={900} cam={[0, 0.2, 8]}>
         <group position={[lerp(prod, 0, -1.4), lerp(far, 0.3, 1.2), lerp(far, 0, -6)]} rotation={[0, Math.sin(f / 30) * 0.3, 0]}>
           <mesh rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[1.45, 1.45, 0.2, 128]} />
-            <Gloss color="#5b4a63" />
+            <Gloss color="#c9b6d8" />
           </mesh>
           <BusyBits spin={f / 40} />
         </group>
@@ -183,12 +184,11 @@ export const S1: React.FC = () => {
   tube.setDrawRange(0, cnt);
   return (
     <>
-      <BigNum pal={pal} x={568} y={90} at={2} n="1" size={340} align="right" />
-      <Kicker pal={pal} x={70} y={130} at={4} text="TIPS 1" />
-      <Txt x={70} y={220} w={620} at={8} size={112} color={pal.line} anim="words">
-        Bentuk sederhana
+      <Kicker pal={pal} x={70} y={110} w={940} align="center" at={2} text="TIPS 1" />
+      <Txt x={70} y={190} w={940} at={8} align="center" size={112} color={pal.line} anim="words">
+        Bentuk|sederhana
       </Txt>
-      <Studio top={500} height={900} cam={[0, 0, 8]}>
+      <Studio bg={pal.bg2} top={500} height={900} cam={[0, 0, 8]}>
         <group rotation={[0, Math.sin(f / 35) * 0.35, 0]} position={[0, bob(f), 0]}>
           <Emblem scale={1.1} />
           {burst < 1 && <BusyBits spread={1 + burst * 3} fade={1 - burst} spin={f / 30} />}
@@ -240,14 +240,14 @@ export const S2: React.FC = () => {
   const shrink = ease(f, b1 - 10, b1 + 20);
   return (
     <>
-      <Kicker pal={pal} x={70} y={120} w={940} align="right" at={2} text="TIPS 2" />
-      <Txt x={70} y={200} w={940} at={6} align="right" size={112} color={pal.line} anim="left">
-        Cek di ukuran kecil
+      <Kicker pal={pal} x={70} y={110} w={940} align="center" at={2} text="TIPS 2" />
+      <Txt x={70} y={190} w={940} at={6} align="center" size={112} color={pal.line} anim="up">
+        Cek di|ukuran kecil
       </Txt>
-      <Txt x={300} y={440} w={710} at={16} align="right" size={44} weight={600} color={pal.accent} lh={1.2}>
+      <Txt x={170} y={430} w={740} at={16} align="center" size={44} weight={600} color={pal.accent} lh={1.2}>
         Logo yang bagus tetap jelas walau sekecil apa pun.
       </Txt>
-      <Studio top={560} height={800} cam={[0, 0.3, 8.5]}>
+      <Studio bg={pal.bg2} top={560} height={800} cam={[0, 0.3, 8.5]}>
         {shrink < 1 && <Emblem scale={lerp(shrink, 1.4, 0.2)} opacity={1 - shrink} rotation={[0, f / 40, 0]} />}
         {ITEMS.map((it, i) => {
           const p = ease(f, b1 + 5 + i * 18, b1 + 30 + i * 18);
@@ -319,7 +319,7 @@ export const S3: React.FC = () => {
       <Txt x={70} y={190} w={940} at={6} align="center" size={120} color={pal.line} anim="scale">
         Batasi warna
       </Txt>
-      <Studio top={380} height={1000} cam={[0, 0.2, 8.5]}>
+      <Studio bg={pal.bg2} top={380} height={1000} cam={[0, 0.2, 8.5]}>
         <Emblem scale={1.0} position={[0, -0.9, 0]} rotation={[0, Math.sin(f / 30) * 0.35, 0]} mono={mono} />
         {CHIPS.map((c, i) => {
           const keep = i < 3;
@@ -335,7 +335,7 @@ export const S3: React.FC = () => {
           );
         })}
       </Studio>
-      <Callout pal={pal} at={b2 - 8} tx={440} ty={1130} x={70} y={1250} w={420} text="Hitam putih tetap jelas, cocok untuk stempel dan fotokopi" />
+      <Callout pal={pal} at={b2 - 8} tx={440} ty={1130} x={70} y={1250} w={520} text="Hitam putih tetap jelas, cocok untuk stempel dan fotokopi" />
       <Txt x={70} y={1420} w={520} at={b1 + 20} size={190} color={pal.accent} anim="left">
         2–3
       </Txt>
@@ -364,11 +364,11 @@ export const S4: React.FC = () => {
   const second = ease(f, b2 - 25, b2 + 5);
   return (
     <>
-      <BigNum pal={pal} x={50} y={90} at={2} n="4" size={300} />
-      <Txt x={330} y={150} w={690} at={6} size={100} color={pal.line} anim="words">
-        Huruf mudah dibaca
+      <Kicker pal={pal} x={70} y={110} w={940} align="center" at={2} text="TIPS 4" />
+      <Txt x={70} y={190} w={940} at={6} align="center" size={110} color={pal.line} anim="words">
+        Huruf|mudah dibaca
       </Txt>
-      <Studio top={540} height={760} cam={[0, 0.1, 8]}>
+      <Studio bg={pal.bg2} top={540} height={760} cam={[0, 0.1, 8]}>
         <group rotation={[0, Math.sin(f / 40) * 0.25, 0]} position={[0, 0.7 + bob(f), 0]}>
           {tidyUp < 1 &&
             LETTERS.map((ch, i) => {
@@ -413,7 +413,7 @@ export const S5: React.FC = () => {
       <Txt x={70} y={190} w={940} at={6} align="center" size={116} color={pal.line} anim="words">
         Punya ciri khas
       </Txt>
-      <Studio top={430} height={860} cam={[0, 0.2, 8.5]}>
+      <Studio bg={pal.bg2} top={430} height={860} cam={[0, 0.2, 8.5]}>
         <group position={[-1.7, lerp(sink, 0, -0.6), 0]} scale={lerp(sink, 1, 0.8)} rotation={[0, Math.sin(f / 30) * 0.3, 0]}>
           <mesh rotation={[Math.PI / 2, 0, 0]}>
             <cylinderGeometry args={[1.0, 1.0, 0.2, 96]} />
@@ -468,9 +468,9 @@ export const Outro: React.FC = () => {
   return (
     <>
       <Txt x={70} y={150} w={940} at={4} align="center" size={124} color={pal.line} anim="words">
-        Satu logo, di mana saja
+        Satu logo,|di mana saja
       </Txt>
-      <Studio top={470} height={900} cam={[0, 1.8, 10]}>
+      <Studio bg={pal.bg2} top={470} height={900} cam={[0, 1.8, 10]}>
         <group rotation={[0, spin, 0]} position={[0, -0.5, 0]}>
           {[0, 1, 2].map((i) => {
             const a = (i / 3) * Math.PI * 2;

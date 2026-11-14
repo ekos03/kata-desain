@@ -78,18 +78,20 @@ Salin pola dari `src/videos/logo-umkm/` (baca `theme.ts`, `index.tsx`, dan `scen
 - Tambahkan ke `src/videos/registry.ts`.
 
 Aturan visual (wajib, ini permintaan pemilik kanal):
-- **Warna lembut (*soft*)**: latar terang pastel dari tone video, teks gelap senada tone, aksen tone. Jangan latar gelap.
+- **Warna lembut (*soft*), latar warna solid**: satu warna pastel polos dari tone video (tanpa gradasi, pola, atau cahaya), teks gelap senada tone, aksen tone. Jangan latar gelap. Kirim `bg={pal.bg2}` ke setiap `<Studio>` supaya kanvas 3D menyatu dengan latar dan kaca membiaskan warnanya.
 - **Tata letak bebas, bukan pola NOEKANG**: jangan pakai `Title`/`InfoCard`/`KeyPill` dari `lib/ui`. Pakai `src/lib3d/layout.tsx` (`Txt`, `Kicker`, `BigNum`, `Callout`, `Bullets`, `Card`, `Pill`, `Note`) dan taruh teks di mana saja: rata kiri, tengah, atau kanan; atas, tengah, atau bawah; boleh miring sedikit; keterangan dengan garis penunjuk ke objek 3D. **Tiap adegan harus punya susunan berbeda** dari adegan sebelumnya (lihat `src/videos/logo-umkm/scenes.tsx`).
+- **Semua judul rata tengah** (hook, tiap tips, outro), dengan `Kicker` rata tengah di atasnya. Variasi tata letak ada pada poin, kartu, keterangan, dan objek 3D, bukan pada judul.
 - **Cover (hook): judul rata tengah**, besar, satu kata kunci raksasa bergradasi, label kecil di atasnya, objek 3D utama bergerak, dan ajakan di bawah.
 - **Info lebih banyak, tetap jelas**: tiap tahap = judul + 2–3 poin singkat (`Bullets`) atau kartu tips praktis (`Card`, mis. "CARA CEK") + keterangan pada objek (`Callout`). Teks minimal 36 px, kontras cukup, tidak menutupi objek utama.
 - **Animasi tiap tahap harus berbeda gaya** (meledak lalu tersisa satu, menggambar garis, mengecil ke beberapa benda, keping warna jatuh, huruf merapi, stempel silang, *carousel* berputar, partikel, dsb.) dan **disinkronkan ke `beats`**.
 - **Outro:** judul besar rata tengah, daftar cek singkat, `Pill` ajakan, dan `Note` kecil (mis. "Logo … hanya contoh").
-- **EYD:** huruf kapital judul benar, kata asing *miring*, "dan" bukan "&", bilangan sesuai kaidah. Semua teks lewat `tidy()` / `textWrap: "balance"` agar **tidak ada kata menggantung** di akhir baris.
+- **EYD:** huruf kapital judul benar, kata asing *miring*, "dan" bukan "&", bilangan sesuai kaidah.
+- **Pemenggalan baris sesuai kaidah**: semua teks lewat `tidy()` (kata tugas/kata depan menempel ke kata sesudahnya, angka menempel ke satuannya, frasa padu seperti "hitam putih" dan "media sosial" tidak dipisah, tidak ada kata tunggal di baris akhir) dan `textWrap: "balance"`; tidak ada pemotongan kata dengan tanda hubung. Untuk judul, tentukan titik potong sendiri dengan `|` di `Txt` (mis. `Cek di|ukuran kecil`, `Huruf|mudah dibaca`) agar tiap baris berupa frasa utuh. Tambahkan frasa baru ke `FRASA` di `src/lib/ui.tsx` bila perlu. Periksa setiap baris di lembar kontak.
 - Tidak ada teks/objek bertumpuk atau terpotong tepi layar. Area aman: kiri/kanan 64 px, progress bar di bawah (bottom 48).
 - Teks `Pill` ≤ 30 karakter (harus satu baris). Badge/kartu harus sudah tampil penuh ≥ 1 dtk sebelum scene berakhir — jangan jadwalkan animasi di 15 frame terakhir scene.
 - Spasi tak terpisah: pakai `const NBSP = String.fromCharCode(160)` di template literal (ESLint menolak karakter NBSP mentah). Untuk teks biasa cukup `tidy()`.
 - Efek sekali lewat (kilau, partikel) harus disembunyikan setelah selesai agar tidak tersisa di tepi layar.
-- **3D halus, bukan *low-poly***: geometri bersegmen tinggi (bola/silinder ≥ 64 segmen, `RoundedBox` `smoothness` ≥ 6, ekstrusi dengan *bevel*), bahan mengilap `Gloss` (clearcoat), cahaya studio dari `Studio`. Hindari `transmission` (kaca) dan bayangan real-time karena memperlambat render.
+- **3D halus bergaya *liquid glass***: geometri bersegmen tinggi (bola/silinder ≥ 64 segmen, `RoundedBox` `smoothness` ≥ 6, ekstrusi dengan *bevel*). `Gloss` bawaan = kaca bening berwarna (transmisi, kilau pelangi tipis); pakai `Gloss solid` hanya untuk bagian yang harus terbaca jelas (isi logo, cincin logam). Warna kaca jangan terlalu gelap (kaca gelap tampak hitam). Kartu, label, dan kapsul di `layout.tsx` sudah bergaya kaca buram. Hindari bayangan real-time.
 - Teks utama tetap HTML (Inter) di atas kanvas; teks 3D (`Text3D`, font di `src/lib3d/fonts/`) hanya untuk kata kunci pendek.
 - Objek 3D tidak boleh terpotong tepi: pada `Studio` default (kamera z ≈ 8, fov 38) lebar aman ±2,8 unit dari tengah.
 - Video referensi: `src/videos/logo-umkm/` (cangkir + logo menempel, logo ramai menjauh, garis digambar, ukuran kecil, keping warna, huruf 3D, stempel silang, *carousel*).
