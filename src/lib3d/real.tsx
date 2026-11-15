@@ -544,3 +544,32 @@ export const KepingKeripik: React.FC<{ n?: number; spread?: [number, number]; y?
     </group>
   );
 };
+
+/** Titik bernomor kecil yang menempel di produk (pengganti garis penunjuk). */
+export const Marker: React.FC<{ n: number; color: string; p: number } & React.JSX.IntrinsicElements["sprite"]> = ({ n, color, p, ...sp }) => {
+  const tex = useMemo(
+    () =>
+      canvasTex(128, 128, (g) => {
+        g.fillStyle = "#ffffff";
+        g.beginPath();
+        g.arc(64, 64, 62, 0, 7);
+        g.fill();
+        g.fillStyle = color;
+        g.beginPath();
+        g.arc(64, 64, 52, 0, 7);
+        g.fill();
+        g.fillStyle = "#ffffff";
+        g.font = "800 72px 'Bricolage Grotesque', Inter, sans-serif";
+        g.textAlign = "center";
+        g.textBaseline = "middle";
+        g.fillText(String(n), 64, 68);
+      }),
+    [n, color],
+  );
+  const s = 0.32 * p * (1 + Math.max(0, 1 - p) * 0.4);
+  return (
+    <sprite {...sp} scale={[s, s, s]}>
+      <spriteMaterial map={tex} transparent depthTest={false} toneMapped={false} />
+    </sprite>
+  );
+};

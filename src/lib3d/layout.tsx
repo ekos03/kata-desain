@@ -2,7 +2,7 @@ import React from "react";
 import { interpolate, useCurrentFrame } from "remotion";
 import { clamp, Pal, SANS } from "../lib/base";
 import { ease, tidy } from "../lib/ui";
-import { DISPLAY, SERIF } from "./fonts";
+import { DISPLAY } from "./fonts";
 
 // Tata letak bebas KATA DESAIN: teks bisa ditaruh di mana saja (x, y, lebar, perataan),
 // dengan gaya masuk berbeda-beda. Tetap jelas: kontras dari tone, ukuran besar, tanpa kata menggantung.
@@ -202,35 +202,35 @@ export const Note: React.FC<{ pal: Pal; y: number; at: number; text: string }> =
  * Judul tampilan: `|` = pindah baris, `*kata*` = serif miring berwarna aksen,
  * `_kata_` = distabilo. Contoh: "Kenapa *dilewati*|_pembeli?_"
  */
-export const Headline: React.FC<{ pal: Pal; y: number; at: number; text: string; size?: number; out?: number }> = ({ pal, y, at, text, size = 124, out }) => {
+export const Headline: React.FC<{ pal: Pal; y: number; at: number; text: string; size?: number; out?: number }> = ({ pal, y, at, text, size = 132, out }) => {
+  // Semua sans-serif. `*kata*` = warna aksen, `~kata~` = huruf bergaris tepi, `_kata_` = distabilo, `|` = pindah baris.
   const f = useCurrentFrame();
   const o = out !== undefined ? 1 - ease(f, out, out + 10) : 1;
   let wi = 0;
   return (
-    <div style={{ position: "absolute", left: 50, right: 50, top: y, textAlign: "center", opacity: o }}>
+    <div style={{ position: "absolute", left: 40, right: 40, top: y, textAlign: "center", opacity: o }}>
       {text.split("|").map((line, li) => (
-        <div key={li} style={{ lineHeight: 0.98, whiteSpace: "nowrap" }}>
+        <div key={li} style={{ lineHeight: 0.96, whiteSpace: "nowrap" }}>
           {line.split(" ").map((raw, i) => {
             const k = wi++;
             const p = ease(f, at + k * 3, at + k * 3 + 12);
-            const serif = /^\*.*\*[?!.,]?$/.test(raw);
-            const mark = /^_.*_[?!.,]?$/.test(raw);
-            const w = raw.replace(/^[*_]|[*_](?=[?!.,]?$)/g, "");
+            const kind = /^\*.*\*[?!.,]?$/.test(raw) ? "accent" : /^~.*~[?!.,]?$/.test(raw) ? "outline" : /^_.*_[?!.,]?$/.test(raw) ? "mark" : "plain";
+            const w = raw.replace(/^[*_~]|[*_~](?=[?!.,]?$)/g, "");
             const hp = ease(f, at + k * 3 + 8, at + k * 3 + 22);
             return (
-              <span key={i} style={{ position: "relative", display: "inline-block", marginRight: size * 0.22, opacity: p, transform: `translateY(${(1 - p) * 40}px) rotate(${(1 - p) * (k % 2 ? 4 : -4)}deg)` }}>
-                {mark && (
-                  <span style={{ position: "absolute", left: -size * 0.08, right: -size * 0.08, bottom: size * 0.06, height: size * 0.42, background: pal.accent, opacity: 0.35, borderRadius: size * 0.12, transform: `scaleX(${hp}) rotate(-1.5deg)`, transformOrigin: "left" }} />
+              <span key={i} style={{ position: "relative", display: "inline-block", marginRight: size * 0.2, opacity: p, transform: `translateY(${(1 - p) * 40}px) scale(${kind === "accent" ? 1 + (1 - p) * 0.3 : 1})` }}>
+                {kind === "mark" && (
+                  <span style={{ position: "absolute", left: -size * 0.06, right: -size * 0.06, bottom: size * 0.05, height: size * 0.4, background: pal.accent, opacity: 0.4, borderRadius: size * 0.1, transform: `scaleX(${hp}) rotate(-1.5deg)`, transformOrigin: "left" }} />
                 )}
                 <span
                   style={{
                     position: "relative",
-                    fontFamily: serif ? SERIF : DISPLAY,
-                    fontStyle: serif ? "italic" : "normal",
-                    fontWeight: serif ? 400 : 800,
-                    fontSize: serif ? size * 1.12 : size,
-                    letterSpacing: serif ? -1 : -size / 22,
-                    color: serif ? pal.accent : pal.line,
+                    fontFamily: DISPLAY,
+                    fontWeight: 800,
+                    fontSize: size,
+                    letterSpacing: -size / 22,
+                    color: kind === "accent" ? pal.accent : kind === "outline" ? "transparent" : pal.line,
+                    WebkitTextStroke: kind === "outline" ? `${Math.max(3, size / 28)}px ${pal.line}` : undefined,
                   }}
                 >
                   {w}
@@ -240,6 +240,19 @@ export const Headline: React.FC<{ pal: Pal; y: number; at: number; text: string;
           })}
         </div>
       ))}
+    </div>
+  );
+};
+
+/** Kartu info bernomor tanpa garis penunjuk (nomornya sama dengan titik di produk). */
+export const InfoChip: React.FC<{ pal: Pal; x: number; y: number; w: number; at: number; n: number; text: string; out?: number }> = ({ pal, x, y, w, at, n, text, out }) => {
+  const f = useCurrentFrame();
+  const o = out !== undefined ? 1 - ease(f, out, out + 10) : 1;
+  const p = ease(f, at, at + 12);
+  return (
+    <div style={{ position: "absolute", left: x, top: y, width: w, display: "flex", alignItems: "center", gap: 18, padding: "18px 24px 18px 18px", background: "#ffffff", borderRadius: 28, boxShadow: `0 14px 34px ${pal.line}22`, opacity: p * o, transform: `translateY(${(1 - p) * 30}px)` }}>
+      <div style={{ flex: "none", width: 64, height: 64, borderRadius: 32, background: pal.accent, color: "#fff", fontFamily: DISPLAY, fontWeight: 800, fontSize: 40, display: "flex", alignItems: "center", justifyContent: "center" }}>{n}</div>
+      <div style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: 44, lineHeight: 1.05, color: pal.line, letterSpacing: -1, textWrap: "balance" }}>{tidy(text)}</div>
     </div>
   );
 };
