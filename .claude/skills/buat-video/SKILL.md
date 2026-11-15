@@ -138,6 +138,8 @@ Notulen: `content/rapat/2026-11-15-rapat-besar.md` (baca juga tabel "Judul tayan
 9. **Ukur:** bila pemilik mengirim angka tonton/simpan/bagikan, catat di `content/kinerja.md`; riset mingguan memakainya.
 10. **Khusus KATA DESAIN:** kait sebelum–sesudah ("sesudah" sekilas dulu), tiap adegan 2–3 aset pendukung + 1 gerak kecil tanpa menutupi produk, satu langkah praktis yang bisa dicoba hari itu.
 
+10b. **Brief per video:** sebelum menulis naskah, cari slug video di `content/rapat/2026-11-15-rapat-detail-sesi-2.md`. Bila ada, pakai judul tayang, kait, poin, momen kunci, dan ajakannya (tetap periksa kebenarannya). Struktur 60 detik, ikon ✕/✓, SFX khas "benar"/"salah", 3 versi kait (≤ 12 kata) di naskah, dan bingkai pertama sebagai sampul juga mengikuti notulen itu.
+
 ## Review video (langkah wajib, sebelum dikirim ke pemilik)
 Urutan: **Galih (visual) → perbaiki → Eko (isi & kelengkapan) → perbaiki → pemilik (Eko pemilik kanal)**. Supaya hemat render, review pertama memakai lembar kontak `stills.sh` (semua adegan) **sebelum render penuh**; setelah render, ambil 6 bingkai dari mp4 untuk cek akhir.
 
