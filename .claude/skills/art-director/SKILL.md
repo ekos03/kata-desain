@@ -24,3 +24,4 @@ Periksa lembar kontak semua adegan (dan 6 bingkai mp4 setelah render). Tulis kor
 5. **Warna**: sesuai gaya kanal (NOEKANG: latar gelap berbeda tiap adegan; KATA DESAIN: tone lembut berganti tiap adegan), aksen tidak berlebihan.
 6. **Konsistensi gaya** dengan video referensi kanal dan video sebelumnya; variasi animasi tiap adegan.
 7. **Momen kunci** (sebelum–sesudah / tahap penting) terlihat jelas dan cukup lama.
+8. **Standar viral & kualitas** (`/buat-video`): kait 3 detik, momen kunci ≥ 2 detik, ritme 2–3 detik.

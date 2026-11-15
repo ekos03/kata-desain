@@ -125,6 +125,19 @@ pipeline/stills.sh <slug> $(python3 pipeline/frames.py <slug> hook:b1+20 masalah
 
 Buka `.work/<slug>/sheet.jpg` dengan Read. Cek juga frame `end-4` scene yang punya animasi di akhir. Periksa: teks menggantung/bertumpuk/terpotong, area kosong, keterbacaan, sinkron animasi. Perbaiki lalu cek ulang frame yang bermasalah (juga momen tengah animasi, mis. `s3:b2+30`).
 
+## Standar viral & kualitas (hasil rapat besar 15 Nov 2026, dipimpin Eko)
+Notulen: `content/rapat/2026-11-15-rapat-besar.md` (baca juga tabel "Judul tayang usulan" di sana).
+1. **Kait 3 detik:** kalimat VO dan teks layar pertama memakai pola kesalahan, rugi/uang, pertanyaan langsung, atau angka kaget. Jangan buka dengan "Halo" atau "Tips kali ini". Gambar pertama langsung menunjukkan masalah.
+2. **Satu pesan utama**, 3–5 poin bernomor, durasi 45–60 detik.
+3. **Momen kunci wajib:** minimal satu adegan salah vs benar atau sebelum–sesudah, tampil ≥ 2 detik.
+4. **Ritme:** visual/kamera berganti tiap 2–3 detik; teks layar ≤ 7 kata per baris dan sinkron dengan VO.
+5. **Judul tayang & caption berpola kait**, bukan "Tips ..." (slug tidak berubah).
+6. **Alasan menyimpan:** sebelum penutup ada ringkasan daftar periksa satu layar + ajakan komentar dengan pertanyaan spesifik.
+7. **Audio:** VO sedikit lebih cepat di kait, jeda sebelum poin penting, satu efek suara khas di momen kunci, musik −18 s.d. −22 dB di bawah VO.
+8. **Kebenaran di atas viral:** angka bersumber atau ditulis "perkiraan"; topik berisiko selalu menyarankan tenaga ahli.
+9. **Ukur:** bila pemilik mengirim angka tonton/simpan/bagikan, catat di `content/kinerja.md`; riset mingguan memakainya.
+10. **Khusus KATA DESAIN:** kait sebelum–sesudah ("sesudah" sekilas dulu), tiap adegan 2–3 aset pendukung + 1 gerak kecil tanpa menutupi produk, satu langkah praktis yang bisa dicoba hari itu.
+
 ## Review video (langkah wajib, sebelum dikirim ke pemilik)
 Urutan: **Galih (visual) → perbaiki → Eko (isi & kelengkapan) → perbaiki → pemilik (Eko pemilik kanal)**. Supaya hemat render, review pertama memakai lembar kontak `stills.sh` (semua adegan) **sebelum render penuh**; setelah render, ambil 6 bingkai dari mp4 untuk cek akhir.
 
