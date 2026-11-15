@@ -121,6 +121,14 @@
 - **Langkah hari ini:** "Foto kemasanmu dari jarak 2 meter: namanya masih terbaca?"
 - **Aset (Bima):** toples, mangkuk keripik, cangkir teh beruap. Merek fiktif + catatan.
 
+### Sel 17 Nov — feed-instagram-umkm (pengganti, diputuskan pemilik)
+- **Judul tayang:** Feed Instagram Berantakan Bikin Pembeli Ragu? Rapikan dengan 3 Cara Ini
+- **Kait:** feed rapi 1 detik → "Ini akun yang sama. Bedanya cuma cara menyusun fotonya."
+- **Poin:** (1) pilih 2–3 warna utama dan pakai terus; (2) foto produk dengan latar dan cahaya yang sama; (3) selang-seling foto produk, testimoni, dan info (harga/cara pesan); bonus: sorotan (*highlight*) untuk menu, harga, testimoni.
+- **Momen kunci:** layar ponsel menampilkan grid profil berantakan (✕) → kotak-kotak tersusun ulang jadi rapi (✓).
+- **Langkah hari ini:** "Buka profilmu, lihat 9 unggahan terakhir: warnanya senada atau tabrakan?"
+- **Aset (Bima):** ponsel di meja (aset `Phone` dengan tampilan grid fiktif), produk UMKM, cangkir kopi. Akun dan merek fiktif + catatan "hanya contoh"; jangan meniru tampilan aplikasi asli secara persis.
+
 ### Kam 19 Nov — desain-murahan
 - **Judul tayang:** 3 Hal yang Bikin Jualanmu Kelihatan Murahan
 - **Kait:** "Produkmu bagus, tapi kelihatan murah? Biasanya karena tiga hal ini."
