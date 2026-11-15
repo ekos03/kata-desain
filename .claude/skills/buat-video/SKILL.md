@@ -147,7 +147,7 @@ Komponen `src/lib/Sampul.tsx` + skrip `pipeline/sampul.sh`.
 3. Sampul ikut **review Galih → Putra** (lihat lembar cek): judul terbaca di ukuran kecil, tidak keluar panel, gambar tidak terpotong aneh, sesuai isi video, tidak ada klaim berlebihan. Perbaiki lalu jalankan ulang.
 
 ## Review video (langkah wajib, sebelum dikirim ke pemilik)
-Urutan: **Galih (visual) → perbaiki → Putra (isi & kelengkapan) → perbaiki → pemilik (Putra pemilik kanal)**. Supaya hemat render, review pertama memakai lembar kontak `stills.sh` (semua adegan) **sebelum render penuh**; setelah render, ambil 6 bingkai dari mp4 untuk cek akhir.
+Urutan: **Galih (visual) → perbaiki → Putra (isi & kelengkapan) → perbaiki → pemilik**. Supaya hemat render, review pertama memakai lembar kontak `stills.sh` (semua adegan) **sebelum render penuh**; setelah render, ambil 6 bingkai dari mp4 untuk cek akhir.
 
 1. **Review Galih** — baca `/art-director` bagian "Daftar review". Tulis koreksi bernomor (mana, apa salahnya, usulan perbaikan). Perbaiki semuanya, cek ulang bingkai yang diperbaiki.
 2. **Review Putra** — baca `/manajer-produksi` bagian "Daftar review". Tulis koreksi bernomor. Perbaiki semuanya.
