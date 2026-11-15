@@ -129,7 +129,7 @@ host.appendChild(R.domElement);
 const S=new THREE.Scene();S.background=new THREE.Color("#0B0518");S.fog=new THREE.Fog("#0B0518",50,130);
 const cam=new THREE.PerspectiveCamera(45,1,.1,260);
 const hemi=new THREE.HemisphereLight("#d2c2ff","#1a0b33",.5);S.add(hemi);
-const sun=new THREE.DirectionalLight("#f3e8ff",.5);sun.position.set(2,16,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,1024);
+const sun=new THREE.DirectionalLight("#f3e8ff",.5);sun.position.set(2,16,10);sun.castShadow=true;sun.shadow.mapSize.set(1024,512);
 Object.assign(sun.shadow.camera,{left:-30,right:20,top:9,bottom:-9,far:40});S.add(sun);
 const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.7},o));
 const sh=m=>{m.castShadow=m.receiveShadow=true;return m;};
@@ -259,7 +259,10 @@ function makeDesk(p,x,z,wide){const g=new THREE.Group();g.position.set(x,0,z);S.
  const holo=canvasTex(512,288);
  const hm=new THREE.Mesh(new THREE.PlaneGeometry(1.35,.76),new THREE.MeshBasicMaterial({map:holo.t,transparent:true,opacity:.92,depthWrite:false,side:THREE.DoubleSide}));
  hm.position.set(0,2.25,-1.1);g.add(hm);
- const lamp=new THREE.PointLight(p.c,0,3.4);lamp.position.set(0,1.7,-.4);g.add(lamp);
+ // cahaya status meja: lingkaran bercahaya murah (bukan PointLight, agar ringan di HP)
+ const gm=new THREE.MeshBasicMaterial({color:p.c,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+ const glow=new THREE.Mesh(new THREE.CircleGeometry(1.5,32),gm);glow.rotation.x=-Math.PI/2;glow.position.set(0,.03,-.6);g.add(glow);
+ const lamp={color:gm.color,set intensity(v){gm.opacity=v*.16;}};
  g.traverse(o=>{if(o.isMesh)o.userData.staff=p.id;});
  desks[p.id]={holo,lid,lamp,seat:{x,z:z-.95}};}
 const COLS=[-14,-10.6,-7.2,-3.8];
@@ -598,7 +601,7 @@ function tickClock(){const m=wibMinutes();clockT.textContent=String(Math.floor(m
 function refresh(){applyDesks();renderChips();drawBoard();drawShelf();assign();renderPanel();}
 tickClock();renderViews();refresh();
 let lampGoal=1,lamp=1;
-const updLamp=()=>{const kerja=jamKerja()||jamDesain()||jamRisetDesain()||STAFF.some(q=>["bekerja","macet","rapat"].includes(status(q.id)));lampGoal=kerja?1:.3;};updLamp();
+const updLamp=()=>{const kerja=jamKerja()||jamDesain()||jamRisetDesain()||STAFF.some(q=>["bekerja","macet","rapat"].includes(status(q.id)));lampGoal=kerja?1:.45;};updLamp();
 setInterval(()=>{tickClock();assign();updLamp();const a=document.getElementById("act");if(a&&selected&&selected.staff)a.textContent=activity(people.find(q=>q.s.id===selected.staff));},1000);
 
 /* ---------- Putaran animasi ---------- */
@@ -607,7 +610,7 @@ function loop(now){requestAnimationFrame(loop);const dt=Math.min(.05,(now-last)/
  if(t-lastSlow>.12){lastSlow=t;drawTV(t);STAFF.forEach(p=>{if(status(p.id)==="bekerja")drawHolo(p.id,"bekerja",t);});cueBall.position.x=-.8+((t*.5)%1)*.9;}
  people.forEach(p=>stepPerson(p,dt,t));
  if(follow){const pp=people.find(q=>q.s.id===follow);goal.tgt.set(pp.pos.x,1.2,pp.pos.z);}
- lamp+=(lampGoal-lamp)*Math.min(1,dt*1.5);hemi.intensity=.5*lamp;sun.intensity=.5*lamp;
+ lamp+=(lampGoal-lamp)*Math.min(1,dt*1.5);hemi.intensity=.62*lamp;sun.intensity=.55*lamp;
  orb.tgt.lerp(goal.tgt,Math.min(1,dt*3));orb.r+=(goal.r-orb.r)*Math.min(1,dt*3);placeCam();
  if(!reduce&&bike)bike.rotation.y=t*.35;
  if(!reduce){knot.rotation.y=t*.6;knot.rotation.x=t*.3;}
