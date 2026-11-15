@@ -20,3 +20,4 @@ Periksa naskah, lembar kontak, caption, dan berkas. Tulis koreksi bernomor.
 5. **Kelengkapan**: mp4 (durasi 45–75 detik), naskah VO .txt, caption Instagram .txt (kait ≤ 125 karakter, 5–8 tagar), status jadwal diperbarui, commit + push.
 6. **Kesiapan unggah**: tidak ada bagian yang membuat malu bila tayang (salah ketik, salah lafal, potongan aneh).
 7. **Standar viral & kualitas** (`/buat-video`): kait, judul tayang berpola kait, alasan menyimpan, kebenaran di atas viral.
+8. **Sampul**: ada `-sampul-tiktok.png` dan `-sampul-ig.png`, judulnya sesuai isi video dan tanpa klaim berlebihan.

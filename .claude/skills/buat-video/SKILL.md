@@ -140,6 +140,12 @@ Notulen: `content/rapat/2026-11-15-rapat-besar.md` (baca juga tabel "Judul tayan
 
 10b. **Brief per video:** sebelum menulis naskah, cari slug video di `content/rapat/2026-11-15-rapat-detail-sesi-2.md`. Bila ada, pakai judul tayang, kait, poin, momen kunci, dan ajakannya (tetap periksa kebenarannya). Struktur 60 detik, ikon ✕/✓, SFX khas "benar"/"salah", 3 versi kait (≤ 12 kata) di naskah, dan bingkai pertama sebagai sampul juga mengikuti notulen itu.
 
+## Sampul Instagram & TikTok (wajib, setiap video)
+Komponen `src/lib/Sampul.tsx` + skrip `pipeline/sampul.sh`.
+1. Tulis `content/<slug>/sampul.json`: `kicker` (≤ 4 kata), `judul` (judul tayang berpola kait, 2–3 baris dipisah `|`, satu kata aksen `*...*`, ≤ 16 huruf per baris), `sub` (≤ 6 kata, mis. "5 hal yang wajib dicek"), `kanal`, `accent`, dan `band` [y awal, y akhir] = pita ilustrasi/produk dari bingkai video yang **tidak berisi teks** (KATA DESAIN: zona produk ± 480–1420). KATA DESAIN juga: `ink`, `panel` terang, `bgColor`/`bgEdge` = warna latar adegan itu, `font: "'Bricolage Grotesque', sans-serif"`.
+2. Pilih bingkai momen kunci (sesudah/benar) lalu jalankan `pipeline/sampul.sh <slug> <frame> content/<slug>/sampul.json <tanggal>`. Hasil: `output/<tanggal>-<slug>-sampul-tiktok.png`, `-sampul-ig.png` (1080×1920; untuk IG semua teks berada di pita tengah 3:4 agar aman di grid profil), dan lembar cek `-sampul-cek.jpg` (TikTok | IG | potongan grid IG).
+3. Sampul ikut **review Galih → Eko** (lihat lembar cek): judul terbaca di ukuran kecil, tidak keluar panel, gambar tidak terpotong aneh, sesuai isi video, tidak ada klaim berlebihan. Perbaiki lalu jalankan ulang.
+
 ## Review video (langkah wajib, sebelum dikirim ke pemilik)
 Urutan: **Galih (visual) → perbaiki → Eko (isi & kelengkapan) → perbaiki → pemilik (Eko pemilik kanal)**. Supaya hemat render, review pertama memakai lembar kontak `stills.sh` (semua adegan) **sebelum render penuh**; setelah render, ambil 6 bingkai dari mp4 untuk cek akhir.
 
@@ -148,7 +154,7 @@ Urutan: **Galih (visual) → perbaiki → Eko (isi & kelengkapan) → perbaiki �
 3. Render penuh. Ambil 6 bingkai dari mp4 (`ffmpeg -ss <detik> -i <mp4> -frames:v 1`) dan putar audio sekilas; bila Galih/Eko menemukan masalah baru yang jelas, perbaiki dan render ulang **sekali** saja.
 4. Simpan catatan di `content/<slug>/review.md`: koreksi Galih, koreksi Eko, apa yang sudah diperbaiki, sisa catatan (bila ada).
 5. Status kantor digital: `art-director` (Galih) dan `manajer` (Eko) diisi "bekerja"/"selesai" saat review (lewati bila ArtifactData tidak ada).
-6. Kirim ke pemilik beserta ringkasan review (≤ 5 baris: jumlah koreksi Galih dan Eko, yang sudah diperbaiki, sisa catatan).
+6. Kirim ke pemilik video + sampul TikTok & IG beserta ringkasan review (≤ 5 baris: jumlah koreksi Galih dan Eko, yang sudah diperbaiki, sisa catatan).
 
 ## 6. Render, simpan, laporkan
 

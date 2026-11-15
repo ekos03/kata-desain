@@ -1,5 +1,7 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
+import { Sampul, SampulProps } from "./lib/Sampul";
+import "./lib3d/fonts";
 import { VIDEOS } from "./videos/registry";
 
 export const RemotionRoot: React.FC = () => (
@@ -15,5 +17,12 @@ export const RemotionRoot: React.FC = () => (
         height={1920}
       />
     ))}
+    <Still
+      id="sampul"
+      component={Sampul}
+      width={1080}
+      height={1920}
+      defaultProps={{ bg: "uji-realis/sampul-bg.png", kicker: "Kemasan UMKM", judul: "Label *pucat*|bikin dilewati", kanal: "KATA DESAIN", accent: "#F391B4", font: "'Bricolage Grotesque', sans-serif", format: "tiktok" } as SampulProps}
+    />
   </>
 );
