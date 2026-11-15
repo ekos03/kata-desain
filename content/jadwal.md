@@ -6,12 +6,12 @@
 |---|---|---|---|---|---|
 | 1 | Sab, 2026-11-14 | logo-umkm | Tips Logo UMKM agar Mudah Diingat | UMKM | video uji (gaya lama) |
 | – | Min, 2026-11-15 | uji-realis | Uji Gaya Realis: Label Kemasan | UMKM | video uji gaya standar |
-| 2 | Min, 2026-11-15 (dimajukan dari Sel 17) | makeover-kemasan | Makeover Kemasan Keripik: Sebelum dan Sesudah | UMKM | terjadwal |
-| 2b | Sel, 2026-11-17 | feed-instagram-umkm | Feed Instagram UMKM yang Bikin Orang Percaya | UMKM | terjadwal |
-| 3 | Kam, 2026-11-19 | desain-murahan | 3 Kesalahan Desain yang Bikin Jualan Terlihat Murahan | UMKM, pemula | terjadwal |
-| 4 | Sab, 2026-11-21 | foto-produk-hp | Foto Produk Pakai HP agar Terlihat Profesional | UMKM | terjadwal |
-| 5 | Sel, 2026-11-24 | desain-pakai-ai | Desain Pakai AI: Bagus atau Zonk? | Pemula | terjadwal |
-| 6 | Kam, 2026-11-26 | spanduk-warung | Spanduk Warung yang Bikin Orang Mampir | UMKM | terjadwal |
+| 2 | Min, 2026-11-15 (dimajukan dari Sel 17) | makeover-kemasan | Makeover Kemasan Keripik: Sebelum dan Sesudah | UMKM | dibatalkan (divisi ditutup) |
+| 2b | Sel, 2026-11-17 | feed-instagram-umkm | Feed Instagram UMKM yang Bikin Orang Percaya | UMKM | dibatalkan (divisi ditutup) |
+| 3 | Kam, 2026-11-19 | desain-murahan | 3 Kesalahan Desain yang Bikin Jualan Terlihat Murahan | UMKM, pemula | dibatalkan (divisi ditutup) |
+| 4 | Sab, 2026-11-21 | foto-produk-hp | Foto Produk Pakai HP agar Terlihat Profesional | UMKM | dibatalkan (divisi ditutup) |
+| 5 | Sel, 2026-11-24 | desain-pakai-ai | Desain Pakai AI: Bagus atau Zonk? | Pemula | dibatalkan (divisi ditutup) |
+| 6 | Kam, 2026-11-26 | spanduk-warung | Spanduk Warung yang Bikin Orang Mampir | UMKM | dibatalkan (divisi ditutup) |
 
 Cadangan topik: *brief* untuk desainer, tulisan mudah dibaca, desain tidak berantakan.
 Laporan riset Arya: `content/riset/`.

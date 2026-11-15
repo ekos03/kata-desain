@@ -1,5 +1,7 @@
 # kata-desain
 
+> **Status: DITUTUP (15 Nov 2026) atas keputusan pemilik.** Semua produksi dan riset terjadwal dihentikan; repo disimpan sebagai arsip.
+
 Produksi video explainer 9:16 kanal **KATA DESAIN**: tips desain grafis untuk (a) pemula yang belajar desain dan (b) pelaku UMKM/industri yang membutuhkan jasa desain. Bahasa Indonesia, animasi **3D realis sehari-hari** (Remotion + Three.js, bukan *low-poly*). Divisi kedua kantor NOEKANG (divisi pertama: repo `video-arsitek`).
 
 - Membuat video baru: skill **`/buat-video`** (`.claude/skills/buat-video/SKILL.md`). Riset topik: **`/riset-tren`** (Arya). Jadwal: `content/jadwal.md`.
