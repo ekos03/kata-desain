@@ -229,8 +229,9 @@ export const Headline: React.FC<{ pal: Pal; y: number; at: number; text: string;
                     fontWeight: 800,
                     fontSize: size,
                     letterSpacing: -size / 22,
-                    color: kind === "accent" ? pal.accent : kind === "outline" ? "transparent" : pal.line,
-                    WebkitTextStroke: kind === "outline" ? `${Math.max(3, size / 28)}px ${pal.line}` : undefined,
+                    color: kind === "accent" || kind === "outline" ? pal.accent : pal.line,
+                    paintOrder: "stroke fill",
+                    WebkitTextStroke: kind === "outline" ? `${Math.max(6, size / 14)}px ${pal.line}` : undefined,
                   }}
                 >
                   {w}

@@ -550,18 +550,24 @@ export const Marker: React.FC<{ n: number; color: string; p: number } & React.JS
   const tex = useMemo(
     () =>
       canvasTex(128, 128, (g) => {
-        g.fillStyle = "#ffffff";
-        g.beginPath();
-        g.arc(64, 64, 62, 0, 7);
-        g.fill();
-        g.fillStyle = color;
+        // cincin bergaris saja (tanpa isian) supaya produk tetap terlihat
+        g.lineWidth = 16;
+        g.strokeStyle = "rgba(255,255,255,0.9)";
         g.beginPath();
         g.arc(64, 64, 52, 0, 7);
-        g.fill();
-        g.fillStyle = "#ffffff";
-        g.font = "800 72px 'Bricolage Grotesque', Inter, sans-serif";
+        g.stroke();
+        g.lineWidth = 9;
+        g.strokeStyle = color;
+        g.beginPath();
+        g.arc(64, 64, 52, 0, 7);
+        g.stroke();
+        g.font = "800 64px 'Bricolage Grotesque', Inter, sans-serif";
         g.textAlign = "center";
         g.textBaseline = "middle";
+        g.lineWidth = 8;
+        g.strokeStyle = "rgba(255,255,255,0.9)";
+        g.strokeText(String(n), 64, 68);
+        g.fillStyle = color;
         g.fillText(String(n), 64, 68);
       }),
     [n, color],
