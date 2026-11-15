@@ -1,14 +1,16 @@
 # Jadwal produksi KATA DESAIN (WIB)
 
-**2–3 video per minggu** (sementara, menyesuaikan kuota): Selasa dan Kamis tetap, Sabtu cadangan bila kuota cukup. Topik diisi oleh **Arya** (skill `/riset-tren`). Satu tone warna lembut per video, bergiliran. VO memakai TTS gratis lokal; naskah VO diekspor untuk ElevenLabs; setiap video disertai caption Instagram.
+**2–3 video per minggu** (sementara, menyesuaikan kuota): Selasa dan Kamis tetap, Sabtu cadangan bila kuota cukup. Topik diisi oleh **Arya** (skill `/riset-tren`) berdasarkan potensi ramai penonton. Gaya: realis sehari-hari (lihat `src/videos/uji-realis/`). VO memakai TTS gratis lokal; naskah VO diekspor untuk ElevenLabs; setiap video disertai caption Instagram.
 
-| No | Tanggal | Slug | Judul | Penonton | Tone | Status |
-|---|---|---|---|---|---|---|
-| 1 | Sab, 2026-11-14 | logo-umkm | Tips Logo UMKM agar Mudah Diingat | UMKM | pink | video uji |
-| 2 | Sel, 2026-11-17 | kemasan-umkm | Tips Desain Kemasan UMKM agar Dilirik Pembeli | UMKM | oranye | terjadwal |
-| 3 | Kam, 2026-11-19 | ruang-kosong | Tips Desain Tidak Berantakan untuk Pemula | Pemula | lavender | terjadwal |
-| 4 | Sab, 2026-11-21 | feed-instagram-umkm | Tips Feed Instagram UMKM yang Rapi dan Konsisten | UMKM | mint | cadangan |
-| 5 | Sel, 2026-11-24 | brief-desainer | Tips Membuat *Brief* untuk Desainer agar Hasilnya Sesuai | UMKM | langit | terjadwal |
-| 6 | Kam, 2026-11-26 | tulisan-terbaca | Tips agar Tulisan di Desain Mudah Dibaca | Pemula | mentega | terjadwal |
+| No | Tanggal | Slug | Judul | Penonton | Status |
+|---|---|---|---|---|---|
+| 1 | Sab, 2026-11-14 | logo-umkm | Tips Logo UMKM agar Mudah Diingat | UMKM | video uji (gaya lama) |
+| – | Min, 2026-11-15 | uji-realis | Uji Gaya Realis: Label Kemasan | UMKM | video uji gaya standar |
+| 2 | Sel, 2026-11-17 | makeover-kemasan | Makeover Kemasan Keripik: Sebelum dan Sesudah | UMKM | terjadwal |
+| 3 | Kam, 2026-11-19 | desain-murahan | 3 Kesalahan Desain yang Bikin Jualan Terlihat Murahan | UMKM, pemula | terjadwal |
+| 4 | Sab, 2026-11-21 | foto-produk-hp | Foto Produk Pakai HP agar Terlihat Profesional | UMKM | cadangan |
+| 5 | Sel, 2026-11-24 | desain-pakai-ai | Desain Pakai AI: Bagus atau Zonk? | Pemula | terjadwal |
+| 6 | Kam, 2026-11-26 | spanduk-warung | Spanduk Warung yang Bikin Orang Mampir | UMKM | terjadwal |
 
+Cadangan topik: feed Instagram UMKM, *brief* untuk desainer, tulisan mudah dibaca, desain tidak berantakan.
 Laporan riset Arya: `content/riset/`.
