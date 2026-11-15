@@ -31,6 +31,8 @@ Kantor NOEKANG, sayap KATA DESAIN: https://claude.ai/artifact/Fxc1g9o9KqMVer8jfG
 | 3. Kode video 3D + render | Bima | `/desainer-3d` |
 | 4. Musik + efek suara | Nada | `/musik-sfx` |
 | 5. Cek | Teliti | `/qc-video` |
+| Review visual | Galih | `/art-director` |
+| Review isi dan kelengkapan | Eko | `/manajer-produksi` |
 | 6. Render | Rendi | `/editor-render` |
 | Caption + naskah VO | Kirana | `/media-sosial` |
 Baca hanya bagian "Standar kerja" skill tersebut (singkat) sebelum mengerjakan langkahnya; hemat kuota, jangan dibaca ulang.
@@ -122,6 +124,16 @@ pipeline/stills.sh <slug> $(python3 pipeline/frames.py <slug> hook:b1+20 masalah
 ```
 
 Buka `.work/<slug>/sheet.jpg` dengan Read. Cek juga frame `end-4` scene yang punya animasi di akhir. Periksa: teks menggantung/bertumpuk/terpotong, area kosong, keterbacaan, sinkron animasi. Perbaiki lalu cek ulang frame yang bermasalah (juga momen tengah animasi, mis. `s3:b2+30`).
+
+## Review video (langkah wajib, sebelum dikirim ke pemilik)
+Urutan: **Galih (visual) → perbaiki → Eko (isi & kelengkapan) → perbaiki → pemilik (Eko pemilik kanal)**. Supaya hemat render, review pertama memakai lembar kontak `stills.sh` (semua adegan) **sebelum render penuh**; setelah render, ambil 6 bingkai dari mp4 untuk cek akhir.
+
+1. **Review Galih** — baca `/art-director` bagian "Daftar review". Tulis koreksi bernomor (mana, apa salahnya, usulan perbaikan). Perbaiki semuanya, cek ulang bingkai yang diperbaiki.
+2. **Review Eko** — baca `/manajer-produksi` bagian "Daftar review". Tulis koreksi bernomor. Perbaiki semuanya.
+3. Render penuh. Ambil 6 bingkai dari mp4 (`ffmpeg -ss <detik> -i <mp4> -frames:v 1`) dan putar audio sekilas; bila Galih/Eko menemukan masalah baru yang jelas, perbaiki dan render ulang **sekali** saja.
+4. Simpan catatan di `content/<slug>/review.md`: koreksi Galih, koreksi Eko, apa yang sudah diperbaiki, sisa catatan (bila ada).
+5. Status kantor digital: `art-director` (Galih) dan `manajer` (Eko) diisi "bekerja"/"selesai" saat review (lewati bila ArtifactData tidak ada).
+6. Kirim ke pemilik beserta ringkasan review (≤ 5 baris: jumlah koreksi Galih dan Eko, yang sudah diperbaiki, sisa catatan).
 
 ## 6. Render, simpan, laporkan
 
