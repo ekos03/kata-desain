@@ -27,8 +27,12 @@ export const tidy = (s: string) => {
     .replace(/([≥≈±*])\s(?=\S)/g, `$1${NB}`);
   for (const fr of FRASA) t = t.replace(new RegExp(fr.replace(/ /g, "\\s"), "gi"), (m) => m.replace(/\s/g, NB));
   t = t.replace(TUGAS, `$1${NB}`);
+  // awal kalimat: kata pertama menempel ke kata kedua (tidak tertinggal di ujung baris)
+  t = t.replace(/([.!?:]\s+|^)(\S+) (?=\S)/g, `$1$2${NB}`);
+  // akhir kalimat: kata terakhir menempel ke kata sebelumnya
+  t = t.replace(/ (\S+[.!?,:;])(?=\s|$)/g, `${NB}$1`);
   // tidak ada kata tunggal yang menggantung di baris terakhir
-  t = t.replace(/\s(\S{1,9})$/, `${NB}$1`);
+  t = t.replace(/ (\S+)$/, `${NB}$1`);
   return t;
 };
 

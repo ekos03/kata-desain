@@ -141,8 +141,8 @@ export const Video: React.FC = () => {
           <Headline pal={PAL.s1} y={110} at={S.s1.from + 4} text="Label _pucat_" out={S.s1.to - 8} />
           <Sticker x={70} y={330} at={S.s1.from + 10} text="SEBELUM" bg="#e0503c" rot={-7} out={S.s1.to - 8} />
           <Meter pal={PAL.s1} x={520} y={310} w={490} at={S.s1.from + 18} label="Terbaca dari jauh" value={2} out={S.s1.to - 8} />
-          <InfoChip pal={{ ...PAL.s1, accent: "#e0503c" }} x={40} y={1620} w={490} at={at("s1", 1)} n={1} text="Nama produk kecil" out={S.s1.to - 8} />
-          <InfoChip pal={{ ...PAL.s1, accent: "#e0503c" }} x={550} y={1620} w={490} at={at("s1", 2)} n={2} text="Warna tenggelam" out={S.s1.to - 8} />
+          <InfoChip pal={{ ...PAL.s1, accent: "#e0503c" }} x={60} y={1590} w={960} at={at("s1", 1)} n={1} text="Nama produk kecil, sulit dibaca" out={S.s1.to - 8} />
+          <InfoChip pal={{ ...PAL.s1, accent: "#e0503c" }} x={60} y={1715} w={960} at={at("s1", 2)} n={2} text="Warna label tenggelam di kemasan" out={S.s1.to - 8} />
         </>
       )}
       {inS("s2") && (
@@ -150,8 +150,8 @@ export const Video: React.FC = () => {
           <Headline pal={PAL.s2} y={110} at={S.s2.from + 4} text="Nama ~besar~" out={S.s2.to - 8} />
           <Sticker x={70} y={330} at={S.s2.from + 10} text="SESUDAH" bg="#2f9e5a" rot={-7} out={S.s2.to - 8} />
           <Meter pal={PAL.s2} x={520} y={310} w={490} at={S.s2.from + 18} label="Terbaca dari jauh" value={9} good out={S.s2.to - 8} />
-          <InfoChip pal={{ ...PAL.s2, accent: "#2f9e5a" }} x={40} y={1620} w={490} at={at("s2", 1)} n={1} text="Nama besar dan kontras" out={S.s2.to - 8} />
-          <InfoChip pal={{ ...PAL.s2, accent: "#2f9e5a" }} x={550} y={1620} w={490} at={at("s2", 2)} n={2} text="Berat bersih jelas" out={S.s2.to - 8} />
+          <InfoChip pal={{ ...PAL.s2, accent: "#2f9e5a" }} x={60} y={1590} w={960} at={at("s2", 1)} n={1} text="Nama besar dan warnanya kontras" out={S.s2.to - 8} />
+          <InfoChip pal={{ ...PAL.s2, accent: "#2f9e5a" }} x={60} y={1715} w={960} at={at("s2", 2)} n={2} text="Berat bersih jelas terlihat" out={S.s2.to - 8} />
         </>
       )}
       {f >= S.closing.from - 4 && (
