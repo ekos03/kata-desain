@@ -98,7 +98,7 @@ Aset (`src/lib3d/real.tsx`, semua prosedural): `Pouch` (kraft), `Jar` (kaca + is
 
 Aturan visual (wajib, permintaan pemilik kanal):
 - **Judul atas sans-serif** (`Headline`, huruf Bricolage Grotesque dari `src/lib3d/fonts.ts`), pendek 1–3 kata. Kata kunci 1–2 kata dibedakan dengan `*warna aksen*`, `~garis tepi~` (tetap berwarna isi), atau `_stabilo_`. Rata tengah.
-- **Produk utama tidak boleh tertutup** teks atau elemen apa pun. Atur kamera agar produk berada di tengah (± y 560–1580); info di pita atas (± y 300–540) dan pita bawah (± y 1590–1840).
+- **Produk utama tidak boleh tertutup** teks atau elemen apa pun. Atur kamera agar produk berada di tengah (± y 520–1400); info di pita atas (± y 280–500) dan pita bawah (± y 1420–1620). Jangan menaruh teks penting di bawah y 1620 atau di atas y 250: tertutup antarmuka Reels/TikTok/Shorts (lihat `/qc-video`).
 - **Tanpa garis penunjuk.** Pakai `Marker` (cincin bernomor tanpa isian) di produk + `InfoChip` bernomor besar (satu baris, lebar penuh) di bawah.
 - **Lebih ramai, tetap jelas:** tiap adegan 3–5 info kecil (`Sticker`, `Meter`, `Card`, `Bullets`, harga, daftar cek) + 2–3 aset pendukung di latar (buram lembut). Ukuran teks info minimal 40 px.
 - **Satu momen sebelum–sesudah** per video (mis. label pucat berubah menjadi label jelas, stiker SEBELUM/SESUDAH, meter skor naik).
