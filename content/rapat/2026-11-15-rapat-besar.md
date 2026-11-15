@@ -1,6 +1,6 @@
 # Notulen Rapat Besar KATA DESAIN — 15 November 2026
 
-**Pemimpin:** Eko · **Hadir:** seluruh kru NOEKANG dan KATA DESAIN (Arya, Irena, Galih, Bima, Suara, Nada, Teliti, Rendi, Kirana, Silvia, Raka, Dimas)
+**Pemimpin:** Putra · **Hadir:** seluruh kru NOEKANG dan KATA DESAIN (Arya, Irena, Galih, Bima, Suara, Nada, Teliti, Rendi, Kirana, Silvia, Raka, Dimas)
 **Agenda:** membahas seluruh konten agar berpeluang viral dan kualitasnya bagus. Keputusan umum kedua kanal sama dengan notulen NOEKANG (`video-arsitek/content/rapat/2026-11-15-rapat-besar.md`); ringkasannya ada di skill `/buat-video` bagian "Standar viral & kualitas".
 
 > Catatan jujur: belum ada data tonton. Keputusan berdasarkan riset Arya & Irena (15 Nov) dan akan dievaluasi setelah 2 minggu tayang.

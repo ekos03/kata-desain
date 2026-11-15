@@ -1,10 +1,10 @@
 # Rapat Konsep Visual Realis KATA DESAIN
 
-**Waktu:** Sabtu malam, 14 November 2026 · **Peserta:** Irena (Konsep), Arya (Riset Pasar), Bima (Desainer 3D) · **Diminta oleh:** Eko
+**Waktu:** Sabtu malam, 14 November 2026 · **Peserta:** Irena (Konsep), Arya (Riset Pasar), Bima (Desainer 3D) · **Diminta oleh:** Putra
 **Catatan jujur:** semua peran dijalankan oleh satu agen Claude yang bekerja bergantian sebagai Irena, Arya, dan Bima. "Rapat" ini adalah sesi kerja bersama: tiap peran menyumbang temuan dari bidangnya, lalu disusun menjadi keputusan bersama.
 
 ## 1. Latar
-Eko tidak cocok dengan video uji pertama (aset tidak nyambung, komposisi kurang pas). Dari tiga arah gaya, Eko memilih **"satu objek utama"**, dengan syarat **dekat dan realis dengan kehidupan nyata**.
+Putra tidak cocok dengan video uji pertama (aset tidak nyambung, komposisi kurang pas). Dari tiga arah gaya, Putra memilih **"satu objek utama"**, dengan syarat **dekat dan realis dengan kehidupan nyata**.
 
 ## 2. Temuan Irena (konsep visual)
 - Video produk 3D pendek sedang tren tahun 2026: pencahayaan sinematik, komposisi rapat, dan produk yang akurat seperti aslinya ([Elipse Studio](https://elipsestudio.com/blogs/3d-animation-motion-graphics-2026/), [Prolific](https://prolificstudio.co/blog/3d-product-animation-still-outperforms-ai-generated-product-videos/), [Maverick Frame](https://maverickframe.com/blog/product-rendering-trends/)).
@@ -55,4 +55,4 @@ Eko tidak cocok dengan video uji pertama (aset tidak nyambung, komposisi kurang 
   - **Feed Instagram (21 Nov):** opsi 8 ponsel.
   - ***Brief* desainer (24 Nov):** opsi 5 dapur atau opsi 1 meja kerja.
   - **Tulisan mudah dibaca (26 Nov):** opsi 6 lapak, uji baca dari jauh.
-- Langkah berikutnya setelah Eko memilih: Bima membuat satu video uji 20 detik dengan opsi terpilih untuk mengukur waktu render, lalu kit dan skill diperbarui.
+- Langkah berikutnya setelah Putra memilih: Bima membuat satu video uji 20 detik dengan opsi terpilih untuk mengukur waktu render, lalu kit dan skill diperbarui.

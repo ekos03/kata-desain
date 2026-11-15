@@ -1,6 +1,6 @@
 # Notulen Rapat Detail Sesi 2 — 15 November 2026
 
-**Tempat:** ruang rapat bersama kantor digital NOEKANG · **Pemimpin:** Eko (Manajer Produksi)
+**Tempat:** ruang rapat bersama kantor digital NOEKANG · **Pemimpin:** Putra (Manajer Produksi)
 **Hadir (13):** NOEKANG: Silvia (Riset), Raka (Naskah), Suara (VO), Dimas (Animator), Nada (Musik & SFX), Teliti (QC), Rendi (Editor & Render), Kirana (Media Sosial). KATA DESAIN: Arya (Riset), Irena (Naskah & Konsep), Galih (Art Director), Bima (3D). Kru bersama ikut kedua bagian.
 **Tujuan:** menjabarkan keputusan sesi 1 (`2026-11-15-rapat-besar.md`) sampai rinci per bagian kerja dan per video, supaya tim produksi tinggal menjalankan.
 
@@ -9,7 +9,7 @@
 ---
 
 ## Agenda
-1. Pembukaan Eko: target dan ukuran berhasil
+1. Pembukaan Putra: target dan ukuran berhasil
 2. Struktur video 60 detik (detik demi detik)
 3. Pembahasan per bagian kerja
 4. Bedah 5 video NOEKANG terdekat
@@ -18,7 +18,7 @@
 
 ---
 
-## 1. Pembukaan (Eko)
+## 1. Pembukaan (Putra)
 - "Kita tidak bisa menjamin viral, tapi kita bisa membuat setiap video **layak dibagikan**: penonton merasa terbantu, merasa 'kok baru tahu', lalu menyimpan."
 - **Ukuran berhasil sementara** (bila pemilik mengirim angka): rasio *simpan* dan *bagikan* per tonton, serta berapa persen penonton bertahan sampai detik 3. Angka dicatat Kirana di `content/kinerja.md`.
 - Prinsip: **benar dulu, menarik kemudian, rapi selalu.**
@@ -42,7 +42,7 @@
 → **Disetujui.** Video AI wajib menampilkan sisi bagus dan sisi kurang.
 
 **Raka (Naskah NOEKANG):** "Saya akan menulis 3 versi kalimat kait per video, lalu memilih yang paling pendek dan paling konkret. Batas: kalimat kait ≤ 12 kata. Istilah teknis langsung diberi arti awam, misalnya *sloof* = balok di bawah dinding."
-→ Eko: "Tiga versi kait itu disimpan di naskah supaya Galih dan saya bisa ikut menilai." **Disetujui.**
+→ Putra: "Tiga versi kait itu disimpan di naskah supaya Galih dan saya bisa ikut menilai." **Disetujui.**
 
 **Irena (Naskah KATA DESAIN):** "Polanya: tunjukkan 'sesudah' 1 detik, lalu 'Dulu begini…'. Setiap video ditutup satu langkah yang bisa dicoba hari itu pakai HP."
 → **Disetujui.**
@@ -54,7 +54,7 @@
 → **Disetujui.**
 
 **Bima (3D):** "Untuk 'lebih ramai', saya tambah 2–3 aset sehari-hari per adegan dan satu gerak kecil (uap kopi, kilau plastik, kamera mendorong pelan). Waktu render naik ± 10%, masih masuk jadwal kalau render dimulai paling lambat 11.30."
-→ Eko: "Oke, asal produk utama tidak tertutup dan hasil sampai sebelum 13.00." **Disetujui.**
+→ Putra: "Oke, asal produk utama tidak tertutup dan hasil sampai sebelum 13.00." **Disetujui.**
 
 **Suara (VO):** "Kait dibaca 5–10% lebih cepat, lalu tempo normal. Ada jeda 0,3 detik sebelum setiap angka atau poin penting. Kata asing ditulis ulang sesuai lafal di teks ucapan agar Piper tidak salah baca."
 → **Disetujui.**
@@ -69,7 +69,7 @@
 → **Disetujui.** Bingkai pertama = sampul yang jelas.
 
 **Kirana (Media Sosial):** "Caption dibuka dengan kalimat kait yang sama dengan video (≤ 125 karakter), lalu 2–3 baris ringkasan, pertanyaan komentar, 5–8 tagar campuran (umum + khusus). Waktu unggah usulan: NOEKANG 11.00–13.00 atau 18.00–20.00 WIB, KATA DESAIN 19.00–21.00 WIB. Saya siapkan juga teks sampul ≤ 5 kata."
-→ Eko: "Waktu unggah itu saran ke pemilik; yang mengunggah tetap pemilik." **Disetujui.**
+→ Putra: "Waktu unggah itu saran ke pemilik; yang mengunggah tetap pemilik." **Disetujui.**
 
 ## 4. Bedah 5 video NOEKANG terdekat
 
@@ -152,7 +152,7 @@
 
 ## 6. Risiko, kuota, dan tugas
 - **Risiko kuota:** render 3D ± 70 menit; review Galih memakai lembar kontak sebelum render agar tidak render ulang. Bila kuota menipis, prioritas: kebenaran isi > kait > aset tambahan.
-- **Risiko klaim berlebihan:** Teliti dan Eko berhak menghapus kait yang tidak benar walau menarik.
+- **Risiko klaim berlebihan:** Teliti dan Putra berhak menghapus kait yang tidak benar walau menarik.
 - **Risiko kelelahan format:** pola kait digilir (kesalahan → pertanyaan → angka → sebelum–sesudah) supaya tidak monoton.
 
 | Tugas | Pemilik | Kapan |
@@ -165,6 +165,6 @@
 | Sampul (bingkai pertama) jelas | Rendi | tiap render |
 | Caption + teks sampul + saran jam unggah | Kirana | tiap produksi |
 | Catat kinerja bila angka dikirim pemilik | Kirana | mingguan |
-| Evaluasi ulang | Eko + semua | ± 30 Nov |
+| Evaluasi ulang | Putra + semua | ± 30 Nov |
 
-**Penutup Eko:** "Brief per video di atas dipakai langsung saat produksi. Kalau ada yang ternyata tidak akurat saat riset naskah, perbaiki dan catat di review.md. Terima kasih semua."
+**Penutup Putra:** "Brief per video di atas dipakai langsung saat produksi. Kalau ada yang ternyata tidak akurat saat riset naskah, perbaiki dan catat di review.md. Terima kasih semua."

@@ -74,7 +74,7 @@ max-width:420px;backdrop-filter:blur(10px);display:grid;gap:6px;box-shadow:0 10p
 <script>
 (function(){
 /* ---------- Data kru ---------- */
-// Jam kerja kru mengikuti jadwal produksi otomatis harian; Eko berjaga pagi pukul 08.31.
+// Jam kerja kru mengikuti jadwal produksi otomatis harian; Putra berjaga pagi pukul 08.31.
 const JAM_KERJA={mulai:7*60,selesai:9*60,teks:"07.00–09.00"};
 const STAFF=[
  {id:"penulis",nama:"Raka",peran:"Penulis Naskah",langkah:"Riset dan menyusun naskah",c:"#F4A259",
@@ -91,7 +91,7 @@ const STAFF=[
   look:{g:"m",h:1.05,skin:"#b9794e",hair:"#0f0b09",style:"buzz",shirt:"#4FB3FF",pants:"#1d1b26",mustache:true}},
  {id:"sosmed",nama:"Kirana",peran:"Media Sosial",langkah:"Caption dan naskah VO",c:"#F6C453",
   look:{g:"f",h:.98,skin:"#e8b48a",hair:"#2a1a12",style:"bun",shirt:"#F6C453",pants:"#2a2438",skirt:"#7a2f4f"}},
- {id:"manajer",nama:"Eko",peran:"Manajer Produksi",langkah:"Penjaga pagi 08.31: cek, bangunkan, kabari",c:"#FF8FD8",
+ {id:"manajer",nama:"Putra",peran:"Manajer Produksi",langkah:"Penjaga pagi 08.31: cek, bangunkan, kabari",c:"#FF8FD8",
   look:{g:"m",h:1.09,skin:"#c08055",hair:"#1a120e",style:"short",shirt:"#2a2233",pants:"#3a3f55",jacket:"#FF8FD8",long:true}},
  {id:"riset",nama:"Silvia",peran:"Analis Tren & Riset Pasar",langkah:"Riset tren tiap Kamis, menyusun topik dan jadwal",c:"#5CC8FF",
   look:{g:"f",h:.99,skin:"#dba57a",hair:"#5a2e1a",style:"ponytail",shirt:"#5CC8FF",pants:"#24476b",long:true}},
@@ -310,13 +310,13 @@ const kopi=canvasTex(512,128,(g)=>{rr(g,4,4,504,120,60);g.fillStyle="#140a2b";g.
 plane(1.8,.45,kopi.t,7.7,.55,-5.26);
 for(let i=0;i<4;i++)mesh(new THREE.CylinderGeometry(.05,.045,.1,12),M(["#FF8FD8","#F6C453","#4FE0C8","#EEE9FF"][i]),8.1+i*.18,1.07,-5.8);
 
-/* ---------- Ruang khusus Eko ---------- */
+/* ---------- Ruang khusus Putra ---------- */
 const EX=10.4;
 (function(){const glass=new THREE.MeshStandardMaterial({color:"#c7b3ff",transparent:true,opacity:.16,roughness:.1,metalness:.2,depthWrite:false,side:THREE.DoubleSide});
  [[-2.2,9.0],[5.25,1.9]].forEach(([z,l])=>{const m=new THREE.Mesh(new THREE.BoxGeometry(.08,3.2,l),glass);m.position.set(EX,1.6,z);S.add(m);
   rbox(.16,.12,l,.06,M("#FF8FD8",{emissive:"#FF8FD8",emissiveIntensity:.5}),EX,3.25,z);});
  const ruang=canvasTex(1024,200,(g)=>{rr(g,6,6,1012,188,94);g.fillStyle="#140a2b";g.fill();g.strokeStyle="#FF8FD8";g.lineWidth=8;g.stroke();
-  txt(g,"RUANG EKO",512,118,92,"#FF8FD8","800","center");txt(g,"Manajer Produksi",512,172,40,"#EEE9FF","500","center");});
+  txt(g,"RUANG PUTRA",512,118,92,"#FF8FD8","800","center");txt(g,"Manajer Produksi",512,172,40,"#EEE9FF","500","center");});
  plane(3.0,.59,ruang.t,EX+2.2,3.55,6.15);
  const rug=new THREE.Mesh(new THREE.CircleGeometry(2.6,48),M("#4a1f5c",{roughness:1}));rug.rotation.x=-Math.PI/2;rug.position.set(13.6,.02,-.4);rug.receiveShadow=true;S.add(rug);})();
 makeDesk(STAFF[7],13.6,-3.1,true);
@@ -490,7 +490,7 @@ const BEDS=[];BUNK_X.forEach((bx,i)=>[.61,1.91].forEach((y,j)=>BEDS.push({id:"ti
 LEISURE.push(BEDS[0],BEDS[2]);
 const malam=()=>{const m=wibMinutes();return m>=22*60||m<5*60;};
 const EKO={hub:[12.1,.6],
- desk:{x:13.6,z:-4.05,yaw:0,seat:.5,desk:true,exit:[[11.6,-4.05]],label:"Di meja Ruang Eko"},
+ desk:{x:13.6,z:-4.05,yaw:0,seat:.5,desk:true,exit:[[11.6,-4.05]],label:"Di meja Ruang Putra"},
  admire:{x:11.6,z:2.2,yaw:yawTo(1.6,-.2),pose:"think",exit:[],label:"Mengagumi motor touring"},
  lounge:{x:15.7,z:.4,yaw:-Math.PI/2,seat:.48,pose:"relax",exit:[[14.7,.4]],label:"Santai di kursi"}};
 const ax=s=>s.exit&&s.exit.length?s.exit[s.exit.length-1][0]:s.x;
@@ -547,7 +547,7 @@ function applyDesks(){STAFF.forEach(p=>{const s=status(p.id),d=desks[p.id];
 /* ---------- Kamera ---------- */
 const orb={th:.3,ph:1.1,r:40,tgt:new THREE.Vector3(-6,2,0)};const goal={tgt:new THREE.Vector3(-6,2,0),r:40};let follow=null;
 const VIEWS=[{id:"semua",label:"Seluruh kantor",t:[-6,2,0],r:[52,40]},{id:"desain",label:"KATA DESAIN",t:[-22.6,1.6,-0.6],r:[17,13]},{id:"meja",label:"Meja kru",t:[-8.9,1.6,-1],r:[17,13]},
- {id:"lounge",label:"Lounge",t:[4.6,1.4,-1.2],r:[14,11]},{id:"eko",label:"Ruang Eko",t:[13.5,1.4,-.6],r:[13,10]}];
+ {id:"lounge",label:"Lounge",t:[4.6,1.4,-1.2],r:[14,11]},{id:"eko",label:"Ruang Putra",t:[13.5,1.4,-.6],r:[13,10]}];
 let view="semua";const narrow=()=>host.clientWidth<600;
 function setView(id){view=id;follow=null;const v=VIEWS.find(q=>q.id===id);goal.tgt.set(...v.t);goal.r=v.r[narrow()?0:1];renderViews();renderChips();}
 function placeCam(){orb.ph=Math.max(.45,Math.min(1.45,orb.ph));orb.th=Math.max(-1.25,Math.min(1.25,orb.th));
@@ -581,7 +581,7 @@ function select(sel){selected=sel;renderPanel();}
 function renderPanel(){
  if(!selected){panel.innerHTML=`<div id="hint">Ketuk nama kru untuk mengikutinya, atau ketuk meja, video di rak, dan motor untuk detail. Jam kerja NOEKANG ${JAM_KERJA.teks} WIB (Senin–Jumat); KATA DESAIN ${JAM_DESAIN.teks} WIB, riset Arya Senin siang. Kru yang tugasnya selesai bebas nonton TV, main biliar, ngopi, jalan-jalan, atau tidur di kabin tidur. Lampu utama redup di luar jam kerja dan menyala saat ada yang bekerja atau rapat.</div>`;return;}
  const x=`<button class="close" aria-label="Tutup detail" data-close>×</button>`;
- if(selected.moto){panel.innerHTML=`<h2><span>Garasi Touring</span>${x}</h2><div class="role">Motor touring kesayangan Eko, dipajang di Ruang Eko.</div>`;}
+ if(selected.moto){panel.innerHTML=`<h2><span>Garasi Touring</span>${x}</h2><div class="role">Motor touring kesayangan Putra, dipajang di Ruang Putra.</div>`;}
  else if(selected.staff){const p=STAFF.find(q=>q.id===selected.staff),d=st(p.id),s=status(p.id),pp=people.find(q=>q.s===p);
   panel.innerHTML=`<h2><span>${esc(p.nama)} <span class="pill ${s}">${LABEL[s]}</span></span>${x}</h2><div class="role">${esc(p.peran)} · ${esc(p.langkah)}</div>
   <dl><dt>Sedang</dt><dd id="act">${esc(activity(pp))}</dd><dt>Tugas terakhir</dt><dd>${esc(d.tugas||"Belum ada tugas tercatat")}</dd><dt>Video</dt><dd>${esc(d.video||"–")}</dd>
