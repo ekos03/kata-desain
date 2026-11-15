@@ -19,7 +19,21 @@ Targetkan selesai dalam ±60 menit (render 3D ±15 menit, jalankan di latar bela
 - Commit lebih awal (setelah naskah + VO + timeline jadi, dan setelah `scenes.tsx` lolos lint) agar pekerjaan tidak hilang bila sesi terhenti.
 
 ### Status kantor digital (live, opsional)
-Kantor NOEKANG, sayap KATA DESAIN: https://claude.ai/artifact/Fxc1g9o9KqMVer8jfGKFug — di awal dan akhir tiap langkah, tulis status lewat **ArtifactData** (`action: "update"`, `collection: "pegawai"`, `doc_id` peran): naskah `naskah-desain` (Irena) · VO `suara` · adegan 3D dan render `desainer3d` (Bima) · musik dan efek suara `musik` · cek `qc` · caption `sosmed`. Data `{status, tugas, video: "<slug>", waktu}`. Video: `collection: "video"`, `doc_id: <slug>`, sertakan `divisi: "desain"`. Bila ArtifactData tidak tersedia atau gagal, lewati tanpa menggagalkan produksi.
+Kantor NOEKANG, sayap KATA DESAIN: https://claude.ai/artifact/Fxc1g9o9KqMVer8jfGKFug — di awal dan akhir tiap langkah, tulis status lewat **ArtifactData** (`action: "update"`, `collection: "pegawai"`, `doc_id` peran): naskah `naskah-desain` (Irena) · VO `suara` · arah visual `art-director` (Galih) · adegan 3D dan render `desainer3d` (Bima) · musik dan efek suara `musik` · cek `qc` · caption `sosmed`. Data `{status, tugas, video: "<slug>", waktu}`. Video: `collection: "video"`, `doc_id: <slug>`, sertakan `divisi: "desain"`. Bila ArtifactData tidak tersedia atau gagal, lewati tanpa menggagalkan produksi.
+
+### Kru dan skill keahlian (wajib dibaca singkat di awal tiap langkah)
+| Langkah | Kru | Skill |
+|---|---|---|
+| Riset topik | Arya | `/riset-tren` |
+| 1. Naskah | Irena | `/konsep-naskah` |
+| 2. Voice over | Suara | `/pengisi-suara` |
+| Arah visual + persetujuan stills | Galih | `/art-director` |
+| 3. Kode video 3D + render | Bima | `/desainer-3d` |
+| 4. Musik + efek suara | Nada | `/musik-sfx` |
+| 5. Cek | Teliti | `/qc-video` |
+| 6. Render | Rendi | `/editor-render` |
+| Caption + naskah VO | Kirana | `/media-sosial` |
+Baca hanya bagian "Standar kerja" skill tersebut (singkat) sebelum mengerjakan langkahnya; hemat kuota, jangan dibaca ulang.
 
 ## 0. Persiapan
 
@@ -129,7 +143,7 @@ Aturan caption (contoh: `content/logo-umkm/caption-ig.txt`):
 - 1–2 kalimat masalah, lalu poin tiap tahap bernomor (1️⃣ 2️⃣ …) dalam bahasa awam, sama isinya dengan video.
 - Ajakan: simpan, bagikan, dan bertanya di kolom komentar.
 - Catatan "*Contoh merek fiktif" bila memakai merek contoh.
-- 12–15 tagar relevan berbahasa Indonesia (#desaingrafis #belajardesain #tipsdesain #katadesain #umkm #branding + tagar topik).
+- 5–8 tagar relevan berbahasa Indonesia (lihat `/media-sosial`) (#desaingrafis #belajardesain #tipsdesain #katadesain #umkm #branding + tagar topik).
 - EYD, tanpa klaim berlebihan, panjang ±800–1.300 karakter.
 
 Sebelum commit, ekspor naskah VO (wajib, ikut di-commit):

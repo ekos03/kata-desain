@@ -100,7 +100,9 @@ const STAFF=[
  {id:"desainer3d",nama:"Bima",peran:"Desainer 3D & Animator",langkah:"KATA DESAIN: adegan 3D, animasi, dan render",c:"#FDBA74",div:"desain",
   look:{g:"m",h:1.08,skin:"#b07448",hair:"#120c09",style:"short",shirt:"#FDBA74",pants:"#2b2f3a",beard:true}},
  {id:"riset-desain",nama:"Arya",peran:"Analis Tren & Riset Pasar",langkah:"KATA DESAIN: riset tren dan menyusun jadwal topik",c:"#2DD4BF",div:"desain",
-  look:{g:"m",h:1.06,skin:"#c98d63",hair:"#2a1a10",style:"buzz",shirt:"#2DD4BF",pants:"#1f2a44",glasses:true,long:true}}
+  look:{g:"m",h:1.06,skin:"#c98d63",hair:"#2a1a10",style:"buzz",shirt:"#2DD4BF",pants:"#1f2a44",glasses:true,long:true}},
+ {id:"art-director",nama:"Galih",peran:"Art Director",langkah:"KATA DESAIN: arah visual, komposisi, dan persetujuan sebelum render",c:"#A3E635",div:"desain",
+  look:{g:"m",h:1.08,skin:"#b88358",hair:"#1b120c",style:"short",shirt:"#262033",pants:"#3a3f55",beard:true,glasses:true,long:true}}
 ];
 const LABEL={idle:"Santai",bekerja:"Bekerja",selesai:"Selesai",macet:"Macet",rapat:"Rapat"};
 const state={pegawai:{},video:[]};
@@ -237,7 +239,7 @@ const MEET=[[-24.2,-5.35,0],[-22.8,-5.35,0],[-21.4,-5.35,0],[-24.2,-3.25,Math.PI
 const BUNK_X=[-27.2,-24.6,-22.0],BUNK_Z=5.3;
 /* ---------- Meja kerja ---------- */
 const desks={};
-function makeDesk(p,x,z,wide){const g=new THREE.Group();g.position.set(x,0,z);S.add(g);const W=wide?2.9:2.4;
+function makeDesk(p,x,z,wide){const g=new THREE.Group();g.position.set(x,0,z);S.add(g);const W=wide==="n"?2.05:wide?2.9:2.4;
  rbox(W,.1,1.1,.4,M("#3b2370",{roughness:.45,metalness:.2}),0,.78,0,g);
  [-1,1].forEach(s=>rbox(.12,.74,1,.06,M("#26164a",{metalness:.4}),s*(W/2-.12),.37,0,g));
  rbox(W-.3,.6,.06,.03,M("#1a0c38"),0,.43,.5,g);
@@ -319,9 +321,10 @@ const EX=10.4;
  const rug=new THREE.Mesh(new THREE.CircleGeometry(2.6,48),M("#4a1f5c",{roughness:1}));rug.rotation.x=-Math.PI/2;rug.position.set(13.6,.02,-.4);rug.receiveShadow=true;S.add(rug);})();
 makeDesk(STAFF[7],13.6,-3.1,true);
 makeDesk(STAFF[8],8.4,-1.6);
-makeDesk(STAFF[11],-26.2,0.8);
-makeDesk(STAFF[9],-22.6,0.8);
-makeDesk(STAFF[10],-19.0,0.8);
+makeDesk(STAFF[11],-26.8,0.8,"n");
+makeDesk(STAFF[12],-24.1,0.8,"n");
+makeDesk(STAFF[9],-21.4,0.8,"n");
+makeDesk(STAFF[10],-18.7,0.8,"n");
 // panggung pajangan karya 3D divisi desain
 const show=new THREE.Group();show.position.set(-18.9,0,5.0);show.scale.setScalar(.75);S.add(show);
 mesh(new THREE.CylinderGeometry(1.3,1.4,.3,64),M("#1d3a4a",{metalness:.4,roughness:.3}),0,.15,0,show);
@@ -334,11 +337,11 @@ const showRing=new THREE.Mesh(new THREE.TorusGeometry(1.32,.04,8,64),new THREE.M
  const seatM=M("#5a3a9a");
  MEET.forEach(m=>{mesh(new THREE.CylinderGeometry(.3,.28,.1,20),seatM,m.x,.48,m.z);mesh(new THREE.CylinderGeometry(.04,.04,.42,10),M("#26164a"),m.x,.25,m.z);});
  const glassM=new THREE.MeshStandardMaterial({color:"#c7f0ff",transparent:true,opacity:.14,roughness:.1,depthWrite:false,side:THREE.DoubleSide});
- [[-24.7,6.6],[-18.9,2.6]].forEach(([x,l])=>{const g=new THREE.Mesh(new THREE.BoxGeometry(l,2.6,.06),glassM);g.position.set(x,1.3,-1.9);S.add(g);
+ [[-24.325,7.35],[-18.525,1.85]].forEach(([x,l])=>{const g=new THREE.Mesh(new THREE.BoxGeometry(l,2.6,.06),glassM);g.position.set(x,1.3,-1.9);S.add(g);
   rbox(l,.1,.14,.05,M("#22D3EE",{emissive:"#22D3EE",emissiveIntensity:.5}),x,2.62,-1.9);});
  const tx=canvasTex(1024,180,(g)=>{rr(g,6,6,1012,168,84);g.fillStyle="#140a2b";g.fill();g.strokeStyle="#22D3EE";g.lineWidth=8;g.stroke();
   txt(g,"RUANG RAPAT",512,112,86,"#e0f7ff","800","center");});
- plane(2.6,.46,tx.t,-20.8,2.95,-1.86);
+ plane(2.6,.46,tx.t,-20.05,2.95,-1.86);
  // layar presentasi di dinding kiri
  const sc=canvasTex(640,360,(g)=>{g.fillStyle="#1d2b4a";g.fillRect(0,0,640,360);txt(g,"Agenda minggu ini",40,80,40,"#e0f7ff","800");
   ["Riset tren","Konsep video","Produksi"].forEach((t,i)=>{g.fillStyle="#22D3EE";g.fillRect(40,130+i*60,24,24);txt(g,t,80,152+i*60,32,"#e0f7ff","600");});});
@@ -467,9 +470,10 @@ const yawTo=(dx,dz)=>Math.atan2(dx,dz);
 const SLOTS={};
 STAFF.slice(0,7).forEach(p=>{const s=desks[p.id].seat;SLOTS["meja-"+p.id]={x:s.x,z:s.z,yaw:0,seat:.5,desk:true,exit:[[s.x+1.7,s.z]],label:"Di meja kerja"};});
 SLOTS["meja-riset"]={x:8.4,z:-2.55,yaw:0,seat:.5,desk:true,exit:[[6.7,-2.55]],label:"Di meja kerja"};
-SLOTS["meja-riset-desain"]={x:-26.2,z:-0.15,yaw:0,seat:.5,desk:true,exit:[[-24.4,-0.15]],label:"Di meja kerja"};
-SLOTS["meja-naskah-desain"]={x:-22.6,z:-0.15,yaw:0,seat:.5,desk:true,exit:[[-20.8,-0.15]],label:"Di meja kerja"};
-SLOTS["meja-desainer3d"]={x:-19.0,z:-0.15,yaw:0,seat:.5,desk:true,exit:[[-17.2,-0.15]],label:"Di meja kerja"};
+SLOTS["meja-riset-desain"]={x:-26.8,z:-0.15,yaw:0,seat:.5,desk:true,exit:[[-25.45,-0.15]],label:"Di meja kerja"};
+SLOTS["meja-art-director"]={x:-24.1,z:-0.15,yaw:0,seat:.5,desk:true,exit:[[-22.75,-0.15]],label:"Di meja kerja"};
+SLOTS["meja-naskah-desain"]={x:-21.4,z:-0.15,yaw:0,seat:.5,desk:true,exit:[[-20.05,-0.15]],label:"Di meja kerja"};
+SLOTS["meja-desainer3d"]={x:-18.7,z:-0.15,yaw:0,seat:.5,desk:true,exit:[[-17.35,-0.15]],label:"Di meja kerja"};
 const LEISURE=[
  {id:"sofa1",x:2.6,z:-3.35,yaw:Math.PI,seat:.46,pose:"sofa",exit:[[1.1,-3.6]],label:"Nonton TV"},
  {id:"sofa2",x:3.5,z:-3.35,yaw:Math.PI,seat:.46,pose:"sofa",exit:[[1.1,-3.6]],label:"Nonton TV"},
@@ -481,7 +485,7 @@ const LEISURE=[
  {id:"star1",x:-11.5,z:5.9,yaw:0,pose:"gaze",exit:[],label:"Melihat bintang"},
  {id:"star2",x:-5.5,z:5.9,yaw:0,pose:"gaze",exit:[],label:"Melihat bintang"}];
 const WANDER={wander:true,label:"Jalan-jalan keliling kantor"};
-const MEET_SLOTS=MEET.map((m,i)=>({id:"rapat"+i,x:m.x,z:m.z,yaw:m.yaw,seat:.5,pose:"meet",exit:[[-20.8,-2.6],[-20.8,-.6]],label:"Rapat di ruang rapat"}));
+const MEET_SLOTS=MEET.map((m,i)=>({id:"rapat"+i,x:m.x,z:m.z,yaw:m.yaw,seat:.5,pose:"meet",exit:[[-20.05,-2.6],[-20.05,-.6]],label:"Rapat di ruang rapat"}));
 const BEDS=[];BUNK_X.forEach((bx,i)=>[.61,1.91].forEach((y,j)=>BEDS.push({id:"tidur"+i+j,x:bx+1.0,z:BUNK_Z,yaw:Math.PI/2,lie:y,pose:"sleep",exit:[],label:"Tidur di kabin tidur"})));
 LEISURE.push(BEDS[0],BEDS[2]);
 const malam=()=>{const m=wibMinutes();return m>=22*60||m<5*60;};
